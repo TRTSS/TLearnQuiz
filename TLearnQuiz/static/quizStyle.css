@@ -50,122 +50,182 @@ body {
 
 .bg-rect-tl-1 {
     position: fixed;
-    width: 50%;
-    height: 500px;
+    width: 100%;
+    height: 50%;
     background-color: #4176FF;
     transform: translate(-50%, -50%) rotate(-45deg);
     top: 0px;
     left: 0px;
+    animation: bg-rect-1-anim 2s ease-in-out 0s infinite alternate;
+
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
 }
 
 .bg-rect-tl-2 {
-    position: absolute;
-    width: 50%;
-    height: 350px;
+    position: fixed;
+    width: 100%;
+    height: 40%;
     background-color: #5585FF;
     transform: translate(-50%, -50%) rotate(-45deg);
     top: 0px;
     left: 0px;
+    animation: bg-rect-2-anim 1.9s ease-in-out 0s infinite alternate;
+
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
 }
 
 .bg-rect-tl-3 {
-    position: absolute;
-    width: 50%;
-    height: 200px;
+    position: fixed;
+    width: 100%;
+    height: 30%;
     background-color: #769CFF;
     transform: translate(-50%, -50%) rotate(-45deg);
     top: 0px;
     left: 0px;
+    animation: bg-rect-3-anim 1.8s ease-in-out 0s infinite alternate;
+
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
 }
 
 .bg-rect-tr-1 {
-    position: absolute;
-    width: 50%;
+    position: fixed;
+    width: 100%;
     height: 500px;
     background-color: #4176FF;
     transform: translate(-50%, -50%) rotate(45deg);
     top: 0px;
     left: 100%;
+    animation: bg-rect-1-anim 2s ease-in-out 0s infinite alternate;
+
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
 }
 
 .bg-rect-tr-2 {
-    position: absolute;
-    width: 50%;
+    position: fixed;
+    width: 100%;
     height: 350px;
     background-color: #5585FF;
     transform: translate(-50%, -50%) rotate(45deg);
     top: 0px;
     left: 100%;
+    animation: bg-rect-2-anim 1.9s ease-in-out 0s infinite alternate;
+
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
 }
 
 .bg-rect-tr-3 {
-    position: absolute;
-    width: 50%;
+    position: fixed;
+    width: 100%;
     height: 200px;
     background-color: #769CFF;
     transform: translate(-50%, -50%) rotate(45deg);
     top: 0px;
     left: 100%;
+    animation: bg-rect-3-anim 1.8s ease-in-out 0s infinite alternate;
+
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
 }
 
 .bg-rect-bl-1 {
-    position: absolute;
-    width: 50%;
+    position: fixed;
+    width: 100%;
     height: 500px;
     background-color: #4176FF;
     transform: translate(-50%, -50%) rotate(45deg);
     top: 100%;
     left: 0px;
+    animation: bg-rect-1-anim 2s ease-in-out 0s infinite alternate;
+
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
 }
 
 .bg-rect-bl-2 {
-    position: absolute;
-    width: 50%;
+    position: fixed;
+    width: 100%;
     height: 350px;
     background-color: #5585FF;
     transform: translate(-50%, -50%) rotate(45deg);
     top: 100%;
     left: 0px;
+    animation: bg-rect-2-anim 1.9s ease-in-out 0s infinite alternate;
+
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
 }
 
 .bg-rect-bl-3 {
-    position: absolute;
-    width: 50%;
+    position: fixed;
+    width: 100%;
     height: 200px;
     background-color: #769CFF;
     transform: translate(-50%, -50%) rotate(45deg);
     top: 100%;
     left: 0px;
+    animation: bg-rect-3-anim 1.8s ease-in-out 0s infinite alternate;
+
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
 }
 
 .bg-rect-br-1 {
-    position: absolute;
-    width: 50%;
+    position: fixed;
+    width: 100%;
     height: 500px;
     background-color: #4176FF;
     transform: translate(-50%, -50%) rotate(-45deg);
     top: 100%;
     left: 100%;
+    animation: bg-rect-1-anim 2s ease-in-out 0s infinite alternate;
+
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
 }
 
 .bg-rect-br-2 {
-    position: absolute;
-    width: 50%;
+    position: fixed;
+    width: 100%;
     height: 350px;
     background-color: #5585FF;
     transform: translate(-50%, -50%) rotate(-45deg);
     top: 100%;
     left: 100%;
+    animation: bg-rect-2-anim 1.9s ease-in-out 0s infinite alternate;
+
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
 }
 
 .bg-rect-br-3 {
-    position: absolute;
-    width: 50%;
+    position: fixed;
+    width: 100%;
     height: 200px;
     background-color: #769CFF;
     transform: translate(-50%, -50%) rotate(-45deg);
     top: 100%;
     left: 100%;
+    animation: bg-rect-3-anim 1.8s ease-in-out 0s infinite alternate;
+
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 21px 1px rgba(0, 0, 0, 0.2);
 }
 
 .question-timer {
@@ -174,4 +234,31 @@ body {
     width: 100%;
     height: 100%;
     z-index: -99;
+}
+
+@keyframes bg-rect-1-anim {
+    0% {
+        height: 60%;
+    }
+    100% {
+        height: 70%;
+    }
+}
+
+@keyframes bg-rect-2-anim {
+    0% {
+        height: 45%;
+    }
+    100% {
+        height: 52%;
+    }
+}
+
+@keyframes bg-rect-3-anim {
+    0% {
+        height: 25%;
+    }
+    100% {
+        height: 30%;
+    }
 }

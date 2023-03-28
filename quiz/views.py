@@ -41,6 +41,7 @@ def register_request(request):
 
 
 def login_request(request):
+    context = {}
     if request.GET.get('auto', '') == 'logout':
         logout(request)
     if request.method == "POST":
@@ -51,15 +52,17 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f"You are now logged in as {username}.")
                 if request.GET.get('redirect', '') != '':
                     return redirect(request.GET.get('redirect', ''))
+                else:
+                    return render(request, 'index.html', {})
             else:
-                messages.error(request, "Invalid username or password.")
+                context['error'] = "Неверный логин или пароль"
         else:
-            messages.error(request, "Invalid username or password.")
+            context['error'] = "Неверный логин или пароль"
     form = AuthenticationForm()
-    return render(request, template_name="login.html", context={"login_form": form})
+    context["login_form"] = form
+    return render(request, "login.html", context)
 
 
 # API
