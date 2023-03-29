@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Effect sandbox</title>
+    <link rel="stylesheet" href="{% static 'effects/effects.css' %}">
+
+</head>
+<body>
+{#<img src="{% static 'imgs/check.png' %}">#}
+
+    <button onclick="PlayEmitter();">Play</button>
+    <script src="{% static 'js/effects.js' %}"></script>
+    <script>
+
+
+        let emitter = new Emitter({
+            'duration' : 1,
+            'amount' : 50,
+            'particle' : {
+                'pos' : COORD_CENTER,
+                'speed' : 1,
+                'width' : 50,
+                'height' : 50,
+                'lifetime' : 2,
+                'sprite' : "{% static 'imgs/sparkler.png' %}",
+                'die' : DIE_SMALL
+            }
+        });
+
+        function PlayEmitter () {
+            emitter.play();
+        }
+
+    </script>
+</body>
+</html>

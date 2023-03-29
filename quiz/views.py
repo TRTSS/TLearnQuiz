@@ -95,12 +95,20 @@ def send_quiz_result(request):
 def get_quiz_leaders(request):
     if request.method == "POST":
         quizId = request.POST.get('quizId')
-        results = QuizResult.objects.filter(quizRef=Quiz.objects.filter(id=quizId).first()).all().order_by('-scores')
-        board = {}
+        results = QuizResult.objects.filter(quizRef=Quiz.objects.filter(id=quizId).first()).all().order_by('-scores')[:5]
+        board = {
+            'all': {},
+            'player': {}
+        }
         for index, value in enumerate(results):
-            board[index] = {}
-            board[index]["username"] = value.quizUser.username
-            board[index]["scores"] = value.scores
+            board['all'][index] = {}
+            board['all'][index]["username"] = value.quizUser.username
+            board['all'][index]["scores"] = value.scores
+        playerRes = QuizResult.objects.get(quizRef=Quiz.objects.filter(id=quizId).first(), quizUser=request.user)
+        board['player'] = {
+            'username': playerRes.quizUser.username,
+            'scores': playerRes.scores
+        }
         return JsonResponse({'ok': True, 'data': board})
     else:
         return JsonResponse({'ok': False})
@@ -108,6 +116,10 @@ def get_quiz_leaders(request):
 
 def bot_connection(request):
     return render(request, 'botConnect.html', {})
+
+
+def get_effects_sandbox(request):
+    return render(request, 'effectssandbox.html', {})
 
 
 def get_index(request):

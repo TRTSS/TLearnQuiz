@@ -29,6 +29,10 @@
 <div class="bg-rect-br-2"></div>
 <div class="bg-rect-br-3"></div>
 
+
+    <div class="quiz-answer-button"></div>
+    <div class="quiz-answer-timer qat-idle"></div>
+
 <div id="question-timer" class="question-timer hide"></div>
 
 <div class="fullpage">
@@ -73,7 +77,9 @@
                         <p>Квиз идет до {{ quizObj.quizEndDate }}</p>
 
                         {% if user.is_authenticated %}
-                            <buttton class="btn btn-primary" onclick="StartQuiz();"><i class='bx bx-play'></i> Начать квиз</buttton>
+                            <buttton class="btn btn-primary" onclick="StartQuiz();"><i class='bx bx-play'></i> Начать
+                                квиз
+                            </buttton>
                         {% endif %}
                     {% else %}
                         <div class="block-content">
@@ -86,7 +92,7 @@
                 {% endif %}
             </div>
             <div class="block-content">
-                <table id="leader-board" style="padding: 10px;">
+                <table id="leader-board" style="">
                     <tr style="padding: 10px;">
                         <th>Место</th>
                         <th>Участник</th>
@@ -169,6 +175,12 @@
     let leftMins = Math.floor(left / 60);
     let leftSec = left - (leftMins * 60);
 
+    setInterval(() => {
+        let answerBtn = document.querySelector(".quiz-answer-button");
+        answerBtn.style.height = String(answerBtn.offsetWidth) + "px";
+        let answerBtnGlowing = document.querySelector(".quiz-answer-timer");
+        answerBtnGlowing.style.height = String(answerBtnGlowing.offsetWidth) + "px";
+    }, 10);
 
 
     {% if now < quizObj.quizStartDate %}
@@ -222,7 +234,7 @@
         {% if now >= quizObj.quizEndDate %}
             document.querySelector("#welcome-area").style.display = "none";
             document.querySelector("#welcome-area").classList.remove("d-sm-flex");
-            console.log (document.querySelector("#welcome-area"));
+            console.log(document.querySelector("#welcome-area"));
 
             document.querySelector("#quiz-finished-area").style.display = "block";
         {% endif %}
@@ -287,15 +299,30 @@
 
             let place = 1;
 
-            console.log(board.data);
+            console.log(board.data.all);
 
-            for (var k in board.data) {
-                boardTable.innerHTML += `<tr>
+            for (var k in board.data.all) {
+                let cl = '';
+                if (board.data.all[k].username === board.data.player.username) {
+                    boardTable.innerHTML += `<tr>
+                        <td colspan="3">
+                        <div class='currentPlayer d-flex align-item-center justify-content-between' style='width: 100%;'>
+                            <div>${place}</div>
+                            <div>${board.data.all[k].username}</div>
+                            <div>${board.data.all[k].scores}</div>
+                        </div>
+                        </td>
+                        </tr>
+                    `;
+                } else {
+                    boardTable.innerHTML += `<tr>
                                         <td>${place}</td>
-                                        <td>${board.data[k].username}</td>
-                                        <td>${board.data[k].scores}</td>
+                                        <td>${board.data.all[k].username}</td>
+                                        <td>${board.data.all[k].scores}</td>
                                      </tr>`;
-                place += 1
+
+                }
+                place += 1;
             }
         }
 
@@ -357,6 +384,9 @@
                     timerInterval = setInterval(() => {
                         timeLeft -= 10 / 1000
                         timer.style.width = String(100 / timeForAnswer * timeLeft) + "%";
+                        console.log (document.querySelector('.quiz-answer-glow'));
+                        console.log (360 / timeForAnswer * timeLeft);
+                        document.querySelector('.quiz-answer-timer').style.background = `conic-gradient(white ${360 - 360 / timeForAnswer * timeLeft}deg, #316BFF ${360 - 360 / timeForAnswer * timeLeft}deg 360deg)`;
                         if (currentScoresReward > Math.floor(scoresForQuestion / 2)) {
                             currentScoresReward = Math.floor(scoresForQuestion - (scoresForQuestion / 2 / timeForAnswer * (timeForAnswer - timeLeft)));
                         }
@@ -391,10 +421,12 @@
             document.querySelector("#quiz-loading-area").style.display = "none";
             if (res.ok) {
                 document.querySelector("#quiz-area").style.display = "block";
-                document.querySelector("#question-timer").style.display = "block";
+                {#document.querySelector("#question-timer").style.display = "block";#}
 
                 waitingMusic.pause();
                 quizStarted.play();
+                document.querySelector(".quiz-answer-timer").classList.remove("qat-idle");
+                document.querySelector(".quiz-answer-timer").classList.add("qat-timer");
 
                 SetCurrentQuestion();
             } else {
@@ -420,6 +452,7 @@
                 quizCorrect.pause();
                 scores += currentScoresReward;
                 quizCorrect.play();
+
             }
             currentQuestion += 1;
             SetCurrentQuestion();

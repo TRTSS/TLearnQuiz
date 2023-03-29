@@ -262,3 +262,101 @@ body {
         height: 30%;
     }
 }
+
+.currentPlayer {
+    border: solid white 2px;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0px;
+    border-collapse: collapse;
+}
+
+.quiz-answer-button {
+    position: fixed;
+    width: 20%;
+    height: 300px;
+
+    top: 50%;
+    left: 50%;
+
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+    background: #4176FF;
+}
+
+.quiz-answer-timer {
+    position: fixed;
+
+    height: 300px;
+
+    top: 50%;
+    left: 50%;
+
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: -9;
+
+    -webkit-filter: blur(50px);
+    -moz-filter: blur(50px);
+    -o-filter: blur(50px);
+    -ms-filter: blur(50px);
+    filter: blur(50px);
+}
+
+.qat-idle {
+    width: 22%;
+    background: white;
+}
+
+.qat-timer {
+    width: 25%;
+    background: conic-gradient(white 180deg, #316BFF 180deg 360deg);
+}
+
+.qat-wrong {
+    width: 25%;
+    background: #fa4646;
+
+    animation: qat-wrong-anim 0.5s linear 0s 1 alternate;
+}
+
+@keyframes qat-wrong-anim {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+.quiz-btn-white {
+    -webkit-box-shadow: 0px 0px 21px 3px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 0px 0px 21px 3px rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 21px 3px rgba(255, 255, 255, 1);
+
+    animation: glowingWhite-btn 2s ease-in-out 0s infinite alternate;
+}
+
+.quiz-btn-green {
+    -webkit-box-shadow: 0px 0px 21px 3px rgb(79, 255, 75);
+    -webkit-box-shadow: 0px 0px 21px 3px rgb(79, 255, 75);
+    -webkit-box-shadow: 0px 0px 21px 3px rgb(79, 255, 75);
+
+    /*animation: glowingWhite-btn 2s ease-in-out 0s infinite alternate;*/
+}
+
+@keyframes glowingWhite-btn {
+    0% {
+        -webkit-box-shadow: 0px 0px 21px 3px rgba(255, 255, 255, 1);
+        -moz-box-shadow: 0px 0px 21px 3px rgba(255, 255, 255, 1);
+        box-shadow: 0px 0px 21px 3px rgba(255, 255, 255, 1);
+    }
+    100% {
+        -webkit-box-shadow: 0px 0px 105px 15px rgba(255, 255, 255, 1);
+        -moz-box-shadow: 0px 0px 105px 15px rgba(255, 255, 255, 1);
+        box-shadow: 0px 0px 105px 15px rgba(255, 255, 255, 1);
+    }
+}
