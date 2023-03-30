@@ -6,6 +6,12 @@ class Coord {
 }
 
 const COORD_CENTER = new Coord(window.innerWidth / 2, window.innerHeight / 2);
+let  COORD_MOUSE = new Coord(0, 0);
+
+document.addEventListener("mousemove", (event) => {
+    COORD_MOUSE.x = event.clientX;
+    COORD_MOUSE.y = event.clientY;
+});
 
 class ParticleDieProcess {
     constructor(resize, opacity, delay) {
@@ -17,12 +23,24 @@ class ParticleDieProcess {
 
 const DIE_SMALL = new ParticleDieProcess(0, 0, 0);
 
+const TARGET_FPS = 59;
+const FRAME_RATE = 1000 / TARGET_FPS;
+
+const GRAVITY_G = -9.8;
+
+class Vector {
+    constructor(x, y) {
+        this.x = x
+        this.y = y
+    }
+}
+
 class Particle {
-    constructor(pos, width, height, lifetime = 2, sprite = null, rotation = 0, die = new ParticleDieProcess(1, 1, 0)) {
+    constructor(pos, width, height, lifetime = 2, sprite = null, rotation = 0, die = new ParticleDieProcess(1, 1, 0), acceleration = 0, useGravity = false, gravityScale = 1) {
         this.pos = new Coord(pos.x, pos.y);
         this.width = width;
         this.height = height;
-        this.radialVector = 0;
+        this.radialVector = 90;
         this.speed = 0;
         this.lifetime = lifetime;
         this.aliveTime = 0;
@@ -30,6 +48,9 @@ class Particle {
         this.scale = 1;
         this.dieProcess = new ParticleDieProcess(1, 1, 0);
         this.resizeSpeed = 0;
+        this.acceleration = acceleration;
+        this.useGravity = useGravity
+        this.gravityScale = gravityScale;
 
         setTimeout(() => {
             this.resizeSpeed = (die.resize - 1) / (this.lifetime - this.aliveTime / 1000);
@@ -60,11 +81,23 @@ class Particle {
 
         let updateTimer = setInterval(() => {
             this.aliveTime += 10;
+
+            this.scale += this.resizeSpeed / 1000 * FRAME_RATE;
+            if (this.speed < 0) {
+                this.speed = 0;
+            }
+            else {
+                this.speed += this.acceleration / 1000 * 10;
+            }
+
             this.move(this.radialVector);
-            this.scale += this.resizeSpeed / 1000 * 10;
-            console.log (this.scale);
+            if (this.useGravity) {
+                this.move(-90, (GRAVITY_G * this.gravityScale * Math.pow(this.aliveTime / 1000, 2)) / 2);
+            }
+
+
             this.updateParticle();
-        }, 10);
+        }, FRAME_RATE);
 
         setTimeout(() => {
             this.representation.remove();
@@ -99,9 +132,12 @@ class Particle {
         this.representation.style.height = String(height * this.scale) + "px";
     }
 
-    move(radial) {
-        this.pos.x += Math.cos(radial) * this.speed;
-        this.pos.y += Math.sin(radial) * this.speed;
+    move(radial, speed = this.speed) {
+        let rad = (Math.PI / 180) * radial;
+
+        this.pos.x += Math.cos(rad) * speed;
+        this.pos.y += Math.sin(rad) * speed;
+
     }
 
     updateParticle() {
@@ -113,15 +149,14 @@ class Particle {
 class Emitter {
     constructor(data) {
         this.data = data;
-        setTimeout(() => {
-            clearInterval(lifecycle);
-            delete this;
-        }, data.duration * 1000);
     }
 
     play() {
         let lifecycle = setInterval(() => {
-            let particle = new Particle(this.data.particle.pos, this.data.particle.width, this.data.particle.height, this.data.particle.lifetime, this.data.particle.sprite, this.data.particle.rotation, this.data.particle.die);
+            let particle = new Particle(this.data.particle.pos, this.data.particle.width,
+                 this.data.particle.height, this.data.particle.lifetime, this.data.particle.sprite,
+                this.data.particle.rotation, this.data.particle.die, this.data.particle.acceleration,
+                this.data.particle.gravity, this.data.particle.gravityScale);
             particle.radialVector = Math.random() * 360;
             particle.speed = this.data.particle.speed;
         }, 1000 / this.data.amount);

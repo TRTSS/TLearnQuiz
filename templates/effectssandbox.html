@@ -10,29 +10,30 @@
 </head>
 <body>
 {#<img src="{% static 'imgs/check.png' %}">#}
-
-    <button onclick="PlayEmitter();">Play</button>
     <script src="{% static 'js/effects.js' %}"></script>
     <script>
 
 
         let emitter = new Emitter({
-            'duration' : 1,
-            'amount' : 50,
+            'duration' : 0.1,
+            'amount' : 200,
             'particle' : {
-                'pos' : COORD_CENTER,
-                'speed' : 1,
+                'pos' : COORD_MOUSE,
+                'speed' : 10,
                 'width' : 50,
                 'height' : 50,
-                'lifetime' : 2,
+                'lifetime' : 1,
                 'sprite' : "{% static 'imgs/sparkler.png' %}",
-                'die' : DIE_SMALL
+                'die' : new ParticleDieProcess(4, 0, 0.5),
+                'acceleration' : 0,
+                'gravity' : false,
+                'gravityScale' : 40
             }
         });
 
-        function PlayEmitter () {
+        document.addEventListener("mousedown", (event) => {
             emitter.play();
-        }
+        });
 
     </script>
 </body>
