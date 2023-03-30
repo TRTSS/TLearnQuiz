@@ -9,25 +9,49 @@
 
 </head>
 <body>
+
+    <style>
+        .test {
+            position: fixed;
+            {#transform: translate(-50%, -50%);#}
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: black;
+            rotate: 30deg;
+        }
+    </style>
+
+{#    <div class="test"></div>#}
+
 {#<img src="{% static 'imgs/check.png' %}">#}
     <script src="{% static 'js/effects.js' %}"></script>
     <script>
-
+        new Particle(new Coord(0, 0), 50, 50, 999, null, 45);
 
         let emitter = new Emitter({
             'duration' : 0.1,
-            'amount' : 200,
+            'amount' : 100,
+            'debug' : false,
+            'shape' : {
+                'form' : 'circle',
+                'radius' : 10
+            },
+            'pos' : COORD_MOUSE,
             'particle' : {
+                'debug' : false,
                 'pos' : COORD_MOUSE,
                 'speed' : 10,
                 'width' : 50,
                 'height' : 50,
                 'lifetime' : 1,
-                'sprite' : "{% static 'imgs/sparkler.png' %}",
-                'die' : new ParticleDieProcess(4, 0, 0.5),
+                'sprite' : "{% static 'imgs/check.png' %}",
+                'die' : new ParticleDieProcess(0, 0, 0),
                 'acceleration' : 0,
-                'gravity' : false,
-                'gravityScale' : 40
+                'gravity' : true,
+                'gravityScale' : 40,
+                'rotation' : 45
             }
         });
 

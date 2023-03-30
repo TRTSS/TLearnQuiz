@@ -1,7 +1,6 @@
 particle {
-    transform: translate(-50%, -50%);
-    /*border: solid red 1px;*/
-
+    /*transform-origin: center;*/
+    /*transform: translate(-50%, -50%);*/
 }
 
 particle img {
@@ -15,5 +14,15 @@ particle img {
 }
 
 .debug-particle {
+    border: solid red 1px;
+}
 
+emitter {
+    position: fixed;
+    transform: translate(-50%, -50%);
+}
+
+.emitter-debug-circle {
+    border-radius: 50%;
+    border: solid red 1px;
 }
