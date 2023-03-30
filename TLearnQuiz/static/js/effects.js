@@ -33,6 +33,19 @@ class Vector {
         this.x = x
         this.y = y
     }
+
+    randomize () {
+        this.x = Math.random() * 2 - 1;
+        this.y = Math.random() * 2 - 1;
+    }
+
+    awayFrom (coord) {
+
+    }
+
+    down() {
+        return new Vector(0, -1);
+    }
 }
 
 class Particle {
@@ -40,7 +53,7 @@ class Particle {
         this.pos = new Coord(pos.x, pos.y);
         this.width = width;
         this.height = height;
-        this.radialVector = 90;
+        this.moveVector = new Vector(0, 0);
         this.speed = 0;
         this.lifetime = lifetime;
         this.aliveTime = 0;
@@ -96,9 +109,9 @@ class Particle {
                 this.speed += this.acceleration / 1000 * 10;
             }
 
-            this.move(this.radialVector);
+            this.move(this.moveVector);
             if (this.useGravity) {
-                this.move(-90, (GRAVITY_G * this.gravityScale * Math.pow(this.aliveTime / 1000, 2)) / 2);
+                this.move(new Vector().down(), (GRAVITY_G * this.gravityScale * Math.pow(this.aliveTime / 1000, 2)) / 2);
             }
 
 
@@ -138,12 +151,9 @@ class Particle {
         this.representation.style.height = String(height * this.scale) + "px";
     }
 
-    move(radial, speed = this.speed) {
-        let rad = (Math.PI / 180) * radial;
-
-        this.pos.x += Math.cos(rad) * speed;
-        this.pos.y += Math.sin(rad) * speed;
-
+    move(vector, speed = this.speed) {
+        this.pos.x += vector.x * speed;
+        this.pos.y += vector.y * speed;
     }
 
     updateParticle() {
@@ -205,19 +215,53 @@ class Emitter {
         return id;
     }
 
+    getParticleSpawnPoint() {
+        switch (this.data.shape.form) {
+            case 'circle':
+                let x = Math.random() * 2 - 1;
+                let modY = Math.abs(Math.sqrt(1 - Math.acos(x) * Math.PI / 180));
+                if (this.data.shape.spawnArea === "allSurface") {
+                    let y = Math.random() * modY * 2 - modY;
+                    console.log (`x: ${x}, acos(${x}): ${Math.acos(x)}, modY: ${modY}`);
+                    return new Coord(this.pos.x + x * this.data.shape.radius / 2, this.pos.y + y * this.data.shape.radius / 2);
+                }
+                if (this.data.shape.spawnArea === "borders") {
+                    let m = Math.round(Math.random() * 2 - 1);
+                    if (m <= 0) m = -1;
+                    else m = 1;
+                    let y = modY * m;
+                    console.log (`x: ${x}, acos(${x}): ${Math.acos(x)}, modY: ${modY}`);
+                    return new Coord(this.pos.x + x * this.data.shape.radius / 2, this.pos.y + y * this.data.shape.radius / 2);
+                }
+        }
+    }
+
     play() {
         let lifecycle = setInterval(() => {
-            let particle = new Particle(this.pos, this.data.particle.width,
+            let spawn = this.getParticleSpawnPoint();
+            let particle = new Particle(spawn, this.data.particle.width,
                  this.data.particle.height, this.data.particle.lifetime, this.data.particle.sprite,
                 0, this.data.particle.die, this.data.particle.acceleration,
                 this.data.particle.gravity, this.data.particle.gravityScale, this.data.particle.debug);
-            if (this.data.particle.rotation === "RANDOM") {
+            if (this.data.particle.rotation === "random") {
                 particle.setRotation(Math.random() * 360);
             }
             else {
                 particle.setRotation(this.data.particle.rotation);
             }
-            particle.radialVector = Math.random() * 360;
+
+            let movementVector = new Vector(0, 0);
+            switch (this.data.particle.speedDirection) {
+                case 'fromCenter':
+                    movementVector.x = ((spawn.x - this.pos.x) * 2) / this.data.shape.radius;
+                    movementVector.y = ((spawn.y - this.pos.y) * 2) / this.data.shape.radius;
+                    break
+                case 'random':
+                    movementVector.randomize();
+                    break
+            }
+            particle.moveVector = movementVector;
+
             particle.speed = this.data.particle.speed;
         }, 1000 / this.data.amount);
 

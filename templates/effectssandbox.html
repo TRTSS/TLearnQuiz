@@ -31,27 +31,29 @@
         new Particle(new Coord(0, 0), 50, 50, 999, null, 45);
 
         let emitter = new Emitter({
-            'duration' : 0.1,
-            'amount' : 100,
-            'debug' : false,
+            'duration' : 1,
+            'amount' : 1000,
+            'debug' : true,
             'shape' : {
                 'form' : 'circle',
-                'radius' : 10
+                'radius' : 100,
+                'spawnArea' : 'allSurface'
             },
-            'pos' : COORD_MOUSE,
+            'pos' : COORD_CENTER,
             'particle' : {
                 'debug' : false,
-                'pos' : COORD_MOUSE,
-                'speed' : 10,
-                'width' : 50,
-                'height' : 50,
-                'lifetime' : 1,
-                'sprite' : "{% static 'imgs/check.png' %}",
+                'pos' : COORD_CENTER,
+                'speed' : 0,
+                'speedDirection' : 'fromCenter',
+                'width' : 10,
+                'height' : 10,
+                'lifetime' : 0.5,
+                'sprite' : "{% static 'imgs/sparkler.png' %}",
                 'die' : new ParticleDieProcess(0, 0, 0),
                 'acceleration' : 0,
-                'gravity' : true,
+                'gravity' : false,
                 'gravityScale' : 40,
-                'rotation' : 45
+                'rotation' : 'random'
             }
         });
 
