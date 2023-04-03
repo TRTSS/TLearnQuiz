@@ -104,13 +104,12 @@ def get_quiz_leaders(request):
             board['all'][index] = {}
             board['all'][index]["username"] = value.quizUser.username
             board['all'][index]["scores"] = value.scores
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and QuizResult.objects.get(quizRef=Quiz.objects.filter(id=quizId).first(), quizUser=request.user).exists():
             playerRes = QuizResult.objects.get(quizRef=Quiz.objects.filter(id=quizId).first(), quizUser=request.user)
-            if playerRes is not None:
-                board['player'] = {
-                    'username': playerRes.quizUser.username,
-                    'scores': playerRes.scores
-                }
+            board['player'] = {
+                'username': playerRes.quizUser.username,
+                'scores': playerRes.scores
+            }
         return JsonResponse({'ok': True, 'data': board})
     else:
         return JsonResponse({'ok': False})
