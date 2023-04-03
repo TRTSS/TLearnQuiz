@@ -31,12 +31,40 @@
         new Particle(new Coord(0, 0), 50, 50, 999, null, 45);
 
         let emitter = new Emitter({
-            'duration' : 1,
-            'amount' : 1000,
+            'duration' : 0.1,
+            'amount' : 5000,
+            'debug' : true,
+            'shape' : {
+                'form' : 'rect',
+                'radius' : 100,
+                'width' : 300,
+                'height' : 500,
+                'spawnArea' : 'allSurface'
+            },
+            'pos' : COORD_CENTER,
+            'particle' : {
+                'debug' : false,
+                'pos' : COORD_CENTER,
+                'speed' : 20,
+                'speedDirection' : 'fromCenter',
+                'width' : 50,
+                'height' : 50,
+                'lifetime' : 1,
+                'sprite' : "{% static 'imgs/check.png' %}",
+                'die' : new ParticleDieProcess(0, 0, 0),
+                'acceleration' : 0,
+                'gravity' : true,
+                'gravityScale' : 40,
+                'rotation' : 'random'
+            }
+        });
+        let emitter2 = new Emitter({
+            'duration' : 5,
+            'amount' : 1,
             'debug' : true,
             'shape' : {
                 'form' : 'circle',
-                'radius' : 100,
+                'radius' : 1,
                 'spawnArea' : 'allSurface'
             },
             'pos' : COORD_CENTER,
@@ -45,19 +73,20 @@
                 'pos' : COORD_CENTER,
                 'speed' : 0,
                 'speedDirection' : 'fromCenter',
-                'width' : 10,
-                'height' : 10,
-                'lifetime' : 0.5,
-                'sprite' : "{% static 'imgs/sparkler.png' %}",
+                'width' : 300,
+                'height' : 300,
+                'lifetime' : 1,
+                'sprite' : "{% static 'imgs/check.png' %}",
                 'die' : new ParticleDieProcess(0, 0, 0),
                 'acceleration' : 0,
                 'gravity' : false,
                 'gravityScale' : 40,
-                'rotation' : 'random'
+                'rotation' : 0
             }
-        });
+        })
 
         document.addEventListener("mousedown", (event) => {
+            {#emitter2.play();#}
             emitter.play();
         });
 

@@ -180,6 +180,10 @@ class Emitter {
             this.width = data.shape.radius;
             this.height = data.shape.radius;
         }
+        if (data.shape.form === 'rect') {
+            this.width = data.shape.width;
+            this.height = data.shape.height;
+        }
 
         this.setSize(this.width, this.height);
 
@@ -189,7 +193,8 @@ class Emitter {
         }, FRAME_RATE);
 
         if (this.debug) {
-            this.representation.classList.add('emitter-debug-circle');
+            if (this.data.shape.form === 'circle') this.representation.classList.add('emitter-debug-circle');
+            if (this.data.shape.form === 'rect') this.representation.classList.add('emitter-debug-rect');
         }
     }
 
@@ -233,6 +238,11 @@ class Emitter {
                     console.log (`x: ${x}, acos(${x}): ${Math.acos(x)}, modY: ${modY}`);
                     return new Coord(this.pos.x + x * this.data.shape.radius / 2, this.pos.y + y * this.data.shape.radius / 2);
                 }
+                break
+            case 'rect':
+                let rectX = Math.random() * this.data.width * 2 - this.data.width;
+                let rectY = Math.random() * this.data.height * 2 - this.data.height;
+                return new Coord(this.pos.x + rectX, this.pos.y + rectY);
         }
     }
 

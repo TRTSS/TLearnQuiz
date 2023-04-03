@@ -26,3 +26,7 @@ emitter {
     border-radius: 50%;
     border: solid red 1px;
 }
+
+.emitter-debug-rect {
+    border: solid red 1px;
+}
