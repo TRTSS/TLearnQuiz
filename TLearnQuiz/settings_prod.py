@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'TLearnQuiz',
-        'USER': 'QuizAdmin',
-        'PASSWORD': 'Red159753tie!',
+        'NAME': 'tlearnquiz',
+        'USER': 'quizadmin',
+        'PASSWORD': 'red159753tie!',
         'HOST': 'localhost',
         'PORT': '5432',
     }
