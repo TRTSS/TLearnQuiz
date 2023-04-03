@@ -13,7 +13,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'TLearnQuiz',
-        'USER': 'root',
+        'USER': 'QuizAdmin',
         'PASSWORD': 'Red159753tie!',
         'HOST': 'localhost',
         'PORT': '5432',
