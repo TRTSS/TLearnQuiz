@@ -288,39 +288,7 @@
 
 
 
-        async function ShowLeaderTable() {
-            let board = await GetQuizLeaders();
-            console.log(board);
-            let boardTable = document.querySelector("#leader-board");
 
-            let place = 1;
-
-            console.log(board.data.all);
-
-            for (var k in board.data.all) {
-                let cl = '';
-                if (board.data.all[k].username === board.data.player.username) {
-                    boardTable.innerHTML += `<tr>
-                        <td colspan="3">
-                        <div class='currentPlayer d-flex align-item-center justify-content-between' style='width: 100%;'>
-                            <div>${place}</div>
-                            <div>${board.data.all[k].username}</div>
-                            <div>${board.data.all[k].scores}</div>
-                        </div>
-                        </td>
-                        </tr>
-                    `;
-                } else {
-                    boardTable.innerHTML += `<tr>
-                                        <td>${place}</td>
-                                        <td>${board.data.all[k].username}</td>
-                                        <td>${board.data.all[k].scores}</td>
-                                     </tr>`;
-
-                }
-                place += 1;
-            }
-        }
 
         {% for q in quizObj.quizQuestions.all %}
             questionList.push("{{ q.questionText }}");
@@ -456,7 +424,39 @@
 
     {% endif %}
 
+async function ShowLeaderTable() {
+            let board = await GetQuizLeaders();
+            console.log(board);
+            let boardTable = document.querySelector("#leader-board");
 
+            let place = 1;
+
+            console.log(board.data.all);
+
+            for (var k in board.data.all) {
+                let cl = '';
+                if (board.data.all[k].username === board.data.player.username) {
+                    boardTable.innerHTML += `<tr>
+                        <td colspan="3">
+                        <div class='currentPlayer d-flex align-item-center justify-content-between' style='width: 100%;'>
+                            <div>${place}</div>
+                            <div>${board.data.all[k].username}</div>
+                            <div>${board.data.all[k].scores}</div>
+                        </div>
+                        </td>
+                        </tr>
+                    `;
+                } else {
+                    boardTable.innerHTML += `<tr>
+                                        <td>${place}</td>
+                                        <td>${board.data.all[k].username}</td>
+                                        <td>${board.data.all[k].scores}</td>
+                                     </tr>`;
+
+                }
+                place += 1;
+            }
+        }
 
     ShowLeaderTable();
 </script>
