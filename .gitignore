@@ -1,0 +1,4 @@
+venv
+.idea
+__pycache__
+TLearnQuiz/settings_local.py
