@@ -424,6 +424,20 @@
 
     {% endif %}
 
+    async function GetQuizLeaders() {
+            let data = new FormData();
+            data.append("quizId", {{ quizId }});
+            let resp = await fetch("{% url 'apiGetQuizLeaders' %}", {
+                method: "post",
+                body: data,
+                credentials: "same-origin",
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken")
+                }
+            });
+            return await resp.json();
+        }
+
 async function ShowLeaderTable() {
             let board = await GetQuizLeaders();
             console.log(board);
@@ -457,6 +471,8 @@ async function ShowLeaderTable() {
                 place += 1;
             }
         }
+
+
 
     ShowLeaderTable();
 </script>
