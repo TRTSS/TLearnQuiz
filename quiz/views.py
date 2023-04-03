@@ -104,7 +104,7 @@ def get_quiz_leaders(request):
             board['all'][index] = {}
             board['all'][index]["username"] = value.quizUser.username
             board['all'][index]["scores"] = value.scores
-        if request.user is not None:
+        if request.user.is_authenticated:
             playerRes = QuizResult.objects.get(quizRef=Quiz.objects.filter(id=quizId).first(), quizUser=request.user)
             board['player'] = {
                 'username': playerRes.quizUser.username,
