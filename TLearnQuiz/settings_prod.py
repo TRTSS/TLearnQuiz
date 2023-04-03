@@ -19,3 +19,5 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+CSRF_TRUSTED_ORIGINS = ['http://zuvs.ru/']
