@@ -8,8 +8,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{% static 'bootstrap-5.0.2-dist/css/bootstrap.css' %}" rel='stylesheet'>
+    <script src="{% static 'bootstrap-5.0.2-dist/js/bootstrap.js' %}"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="{% static 'quizStyle.css' %}" rel="stylesheet">
+    <script src="http://fred-wang.github.io/mathml.css/mspace.js"></script>
 </head>
 <body style="overflow-x: hidden;">
 
@@ -30,8 +32,8 @@
 <div class="bg-rect-br-3"></div>
 
 
-    <div class="quiz-answer-button"></div>
-    <div class="quiz-answer-timer qat-idle"></div>
+<div class="quiz-answer-button"></div>
+<div class="quiz-answer-timer qat-idle"></div>
 
 <div id="question-timer" class="question-timer hide"></div>
 
@@ -88,6 +90,13 @@
 
                     {% endif %}
                 {% endif %}
+                <div>Действуют стандартные правила TLearnQuiz.
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Почитайте
+                    </button>
+                    , будет полезно.
+                </div>
+
+
             </div>
             <div class="block-content">
                 <table id="leader-board" style="">
@@ -155,6 +164,34 @@
 
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="color: black;">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Стандартные правила TLearnQuiz</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>1. У участника есть 15 секунд на дачу ответа на вопрос. По истечению времени вопрос пропускается
+                    автоматически.</p>
+                <p>2. Максимальное кол-во очков за правильный ответ расчитывается по формуле <i><b>100 / кол-во вопросов
+                    в квизе</b></i>.</p>
+                <p>3. Минимальное кол-во очков за правильный ответ - половина от максимального кол-ва очков из пункта
+                    2.</p>
+                <p>4. Кол-во очков, которое участник может получить за правильный ответ убывает со скоростью <b><i>(max
+                    - min) / t</i></b> (равномерно пропорционально убыванию времени). </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Понятно!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
 
@@ -351,8 +388,8 @@
                     timerInterval = setInterval(() => {
                         timeLeft -= 10 / 1000
                         timer.style.width = String(100 / timeForAnswer * timeLeft) + "%";
-                        console.log (document.querySelector('.quiz-answer-glow'));
-                        console.log (360 / timeForAnswer * timeLeft);
+                        console.log(document.querySelector('.quiz-answer-glow'));
+                        console.log(360 / timeForAnswer * timeLeft);
                         document.querySelector('.quiz-answer-timer').style.background = `conic-gradient(white ${360 - 360 / timeForAnswer * timeLeft}deg, #316BFF ${360 - 360 / timeForAnswer * timeLeft}deg 360deg)`;
                         if (currentScoresReward > Math.floor(scoresForQuestion / 2)) {
                             currentScoresReward = Math.floor(scoresForQuestion - (scoresForQuestion / 2 / timeForAnswer * (timeForAnswer - timeLeft)));
@@ -428,32 +465,32 @@
     {% endif %}
 
     async function GetQuizLeaders() {
-            let data = new FormData();
-            data.append("quizId", {{ quizId }});
-            let resp = await fetch("{% url 'apiGetQuizLeaders' %}", {
-                method: "post",
-                body: data,
-                credentials: "same-origin",
-                headers: {
-                    "X-CSRFToken": getCookie("csrftoken")
-                }
-            });
-            return await resp.json();
-        }
+        let data = new FormData();
+        data.append("quizId", {{ quizId }});
+        let resp = await fetch("{% url 'apiGetQuizLeaders' %}", {
+            method: "post",
+            body: data,
+            credentials: "same-origin",
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken")
+            }
+        });
+        return await resp.json();
+    }
 
-async function ShowLeaderTable() {
-            let board = await GetQuizLeaders();
-            console.log(board);
-            let boardTable = document.querySelector("#leader-board");
+    async function ShowLeaderTable() {
+        let board = await GetQuizLeaders();
+        console.log(board);
+        let boardTable = document.querySelector("#leader-board");
 
-            let place = 1;
+        let place = 1;
 
-            console.log(board.data.all);
+        console.log(board.data.all);
 
-            for (var k in board.data.all) {
-                let cl = '';
-                if (board.data.all[k].username === board.data.player.username) {
-                    boardTable.innerHTML += `<tr>
+        for (var k in board.data.all) {
+            let cl = '';
+            if (board.data.all[k].username === board.data.player.username) {
+                boardTable.innerHTML += `<tr>
                         <td colspan="3">
                         <div class='currentPlayer d-flex align-item-center justify-content-between' style='width: 100%;'>
                             <div>${place}</div>
@@ -463,18 +500,17 @@ async function ShowLeaderTable() {
                         </td>
                         </tr>
                     `;
-                } else {
-                    boardTable.innerHTML += `<tr>
+            } else {
+                boardTable.innerHTML += `<tr>
                                         <td>${place}</td>
                                         <td>${board.data.all[k].username}</td>
                                         <td>${board.data.all[k].scores}</td>
                                      </tr>`;
 
-                }
-                place += 1;
             }
+            place += 1;
         }
-
+    }
 
 
     ShowLeaderTable();
