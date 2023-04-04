@@ -46,18 +46,18 @@
                     {% if not user.is_authenticated %}
                         <div class="block-content error">
                             <b>Войдите в личный аккаунт, чтобы принять участие в квизе</b><br>
-                            <a style="color: white; font-size: 28px;"
-                               Войти
+                            <a style="color: white;"
                                href="{% url 'login' %}?redirect={{ request.get_full_path }}">
-                                <i class='bx bxs-log-in'></i>
+                                Войти <i class='bx bxs-log-in'></i>
                             </a>
                         </div>
                     {% else %}
                         <div class="block-content ok">
                             Рады снова видеть тебя, {{ user.username }}!<br>
-                            <a style="color: white; font-size: 28px;"
-                               Это не вы? Войдите в свой аккаунт!
-                               href="{% url 'login' %}?auto=logout&redirect={{ request.get_full_path }}"><i
+                            <a style="color: white;"
+
+                               href="{% url 'login' %}?auto=logout&redirect={{ request.get_full_path }}">
+                                Это не вы? Войдите в свой аккаунт!<i
                                     class='bx bxs-log-out'></i></a>
                         </div>
                     {% endif %}
