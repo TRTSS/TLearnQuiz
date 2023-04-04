@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация прошла успешно</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'bootstrap-5.0.2-dist/css/bootstrap.css' %}" rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="{% static 'quizStyle.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="fullpage border border-2">
+            <div class="d-flex align-item-center justify-content-between">
+                <div class="quiz-block text-center" id="welcome-area">
+                    <h2>Вы зарегистрированы</h2>
+                    <p>Ура! Вы зарегистрированы, {{ request.user.username }}!</p>
+                    <a href="{% url 'index' %}" style="color: white;">Перейти на главную страницу</a>
+                </div>
+        </div>
+    </div>
+</body>
+</html>

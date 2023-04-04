@@ -33,7 +33,7 @@ def register_request(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, "Вы успешно зарегистрировались!")
+            return redirect('/registed')
         else:
             messages.error(request, f'Не получилось вас зарегистрировать. email: {form}')
     form = NewUserForm()
@@ -95,7 +95,8 @@ def send_quiz_result(request):
 def get_quiz_leaders(request):
     if request.method == "POST":
         quizId = request.POST.get('quizId')
-        results = QuizResult.objects.filter(quizRef=Quiz.objects.filter(id=quizId).first()).all().order_by('-scores')[:5]
+        results = QuizResult.objects.filter(quizRef=Quiz.objects.filter(id=quizId).first()).all().order_by('-scores')[
+                  :5]
         board = {
             'all': {},
             'player': {}
@@ -104,7 +105,8 @@ def get_quiz_leaders(request):
             board['all'][index] = {}
             board['all'][index]["username"] = value.quizUser.username
             board['all'][index]["scores"] = value.scores
-        if request.user.is_authenticated and QuizResult.objects.filter(quizRef=Quiz.objects.filter(id=quizId).first(), quizUser=request.user).exists():
+        if request.user.is_authenticated and QuizResult.objects.filter(quizRef=Quiz.objects.filter(id=quizId).first(),
+                                                                       quizUser=request.user).exists():
             playerRes = QuizResult.objects.get(quizRef=Quiz.objects.filter(id=quizId).first(), quizUser=request.user)
             board['player'] = {
                 'username': playerRes.quizUser.username,
@@ -140,3 +142,7 @@ def get_index(request):
         else:
             context['passedQuiz'].append(quiz)
     return render(request, 'index.html', context)
+
+
+def get_user_registed(request):
+    return render(request, 'registDone.html', {})
