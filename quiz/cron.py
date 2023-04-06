@@ -5,11 +5,16 @@ import requests
 from django.utils import timezone
 
 from quiz.models import Quiz
+from aiogram import Bot, Dispatcher, executor, types
 
+BOT_API_TOKEN = "5854080741:AAG5eK_jf5130SKO3dd8EgihxfKdIVki0vE"
+
+bot = Bot(token=BOT_API_TOKEN)
+dp = Dispatcher(bot)
+chatID = '-1001883219679'
 
 def SendQuizScheldue():
     apiToken = '5854080741:AAG5eK_jf5130SKO3dd8EgihxfKdIVki0vE'
-    chatID = '-1001883219679'
     apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
 
     future = []
@@ -29,8 +34,7 @@ def SendQuizScheldue():
     message += "\n(сообщение создано автоматически)"
 
     try:
-        response = requests.post(apiURL, json={'chat_id': chatID, 'text': message})
-        print(response.text)
+        bot.send_message(chat_id=chatID, text=message)
     except Exception as e:
         print(e)
 
@@ -42,20 +46,19 @@ def SendQuizStartNotification():
 
     logger = logging.getLogger('django')
 
-
     allQuiz = Quiz.objects.all()
     for quiz in allQuiz:
         logger.info(f"Checking {quiz.quizTitle}")
         startTime = timezone.localtime(quiz.quizStartDate).time()
         now = datetime.datetime.now().time()
-        logger.info(f"Check -> {quiz.quizTitle}: {startTime} and now {now} => {startTime.hour}{startTime.minute} ~ {now.hour}{now.minute}")
+        logger.info(
+            f"Check -> {quiz.quizTitle}: {startTime} and now {now} => {startTime.hour}{startTime.minute} ~ {now.hour}{now.minute}")
         if f"{startTime.hour}{startTime.minute}" == f"{now.hour}{now.minute}":
             message = f"КВИЗ '{quiz.quizTitle}' НАЧАЛСЯ:\n" \
                       f"Скорее заходи и участвуй!\n" \
                       f"Ссылка: http://zuvs.ru/quiz/{quiz.pk}"
 
             try:
-                response = requests.post(apiURL, json={'chat_id': chatID, 'text': message})
-                print(response.text)
+                bot.send_message(chat_id=chatID, text=message)
             except Exception as e:
                 print(e)
