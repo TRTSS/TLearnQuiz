@@ -3,15 +3,16 @@ import logging
 
 import requests
 from django.utils import timezone
+import asyncio
 
 from quiz.models import Quiz
 from aiogram import Bot, Dispatcher, executor, types
 
 BOT_API_TOKEN = "5854080741:AAG5eK_jf5130SKO3dd8EgihxfKdIVki0vE"
 
-bot = Bot(token=BOT_API_TOKEN)
-dp = Dispatcher(bot)
+bot = Bot(token=BOT_API_TOKEN, parse_mode=types.ParseMode.HTML)
 chatID = '-1001883219679'
+
 
 def SendQuizScheldue():
     apiToken = '5854080741:AAG5eK_jf5130SKO3dd8EgihxfKdIVki0vE'
@@ -34,7 +35,7 @@ def SendQuizScheldue():
     message += "\n(сообщение создано автоматически)"
 
     try:
-        bot.send_message(chat_id=chatID, text=message)
+        asyncio.run(SendMessageToChannel(message))
     except Exception as e:
         print(e)
 
@@ -59,8 +60,12 @@ def SendQuizStartNotification():
                       f"Ссылка: http://zuvs.ru/quiz/{quiz.pk}"
             logger.info("NOW ^^^")
             try:
-                bot.send_message(chat_id=chatID, text=message)
+                asyncio.run(SendMessageToChannel(message))
                 logger.info("MESSAGE SENT ^^^")
             except BaseException as e:
                 logger.info("ERROR")
                 logger.info(e)
+
+
+async def SendMessageToChannel(message):
+    await bot.send_message(chatID, message)
