@@ -1,3 +1,5 @@
+import logging
+
 from django.utils import timezone
 
 from quiz.models import Quiz
@@ -8,4 +10,5 @@ def SendQuizScheldue():
     chatID = '-1001883219679'
     apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
 
-    print ('hello crontab!')
+    logger = logging.getLogger('django')
+    logger.info("CRON WORKS!")
