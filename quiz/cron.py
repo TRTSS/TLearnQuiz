@@ -8,9 +8,4 @@ def SendQuizScheldue():
     chatID = '-1001883219679'
     apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
 
-    future = []
-
-    allQuiz = Quiz.objects.all()
-    for quiz in allQuiz:
-        if quiz.quizStartDate > timezone.now():
-            future.append(quiz)
+    print ('hello crontab!')
