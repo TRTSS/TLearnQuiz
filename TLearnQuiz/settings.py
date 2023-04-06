@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'quiz',
     'crispy_forms',
-    'crispy_bootstrap5'
+    'crispy_bootstrap5',
+    'django_crontab'
 ]
 
 MIDDLEWARE = [
