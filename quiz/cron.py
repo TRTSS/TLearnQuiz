@@ -57,7 +57,7 @@ def SendQuizStartNotification():
             message = f"КВИЗ '{quiz.quizTitle}' НАЧАЛСЯ:\n" \
                       f"Скорее заходи и участвуй!\n" \
                       f"Ссылка: http://zuvs.ru/quiz/{quiz.pk}"
-
+            logger.info("NOW ^^^")
             try:
                 bot.send_message(chat_id=chatID, text=message)
             except Exception as e:
