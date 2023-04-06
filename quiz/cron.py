@@ -48,7 +48,7 @@ def SendQuizStartNotification():
 
         startTime = quiz.quizStartDate
         now = datetime.datetime.now().time()
-        logger.info(f"Check -> {quiz.quizTitle}: {quiz.quizStartDate.time()} and now {datetime.datetime.now().time()} => {startTime.hour}{startTime.minute} ~ {now.hour}{now.minute}")
+        logger.info(f"Check -> {quiz.quizTitle}: {quiz.quizStartDate} and now {datetime.datetime.now().time()} => {startTime.hour}{startTime.minute} ~ {now.hour}{now.minute}")
         if f"{startTime.hour}{startTime.minute}" == f"{now.hour}{now.minute}":
             message = f"КВИЗ '{quiz.quizTitle}' НАЧАЛСЯ:\n" \
                       f"Скорее заходи и участвуй!\n" \
