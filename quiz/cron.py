@@ -60,5 +60,7 @@ def SendQuizStartNotification():
             logger.info("NOW ^^^")
             try:
                 bot.send_message(chat_id=chatID, text=message)
-            except Exception as e:
+                logger.info("MESSAGE SENT ^^^")
+            except BaseException as e:
+                logger.info("ERROR")
                 logger.info(e)
