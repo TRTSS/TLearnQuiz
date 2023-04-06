@@ -45,7 +45,7 @@ def SendQuizStartNotification():
 
     allQuiz = Quiz.objects.all()
     for quiz in allQuiz:
-
+        logger.info(f"Checking {quiz.quizTitle}")
         startTime = timezone.localtime(quiz.quizStartDate.time())
         now = datetime.datetime.now().time()
         logger.info(f"Check -> {quiz.quizTitle}: {startTime} and now {now} => {startTime.hour}{startTime.minute} ~ {now.hour}{now.minute}")
