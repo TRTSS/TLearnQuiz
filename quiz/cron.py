@@ -7,6 +7,7 @@ import asyncio
 
 from quiz.models import Quiz
 from aiogram import Bot, Dispatcher, executor, types
+from django.templatetags.static import static
 
 BOT_API_TOKEN = "5854080741:AAG5eK_jf5130SKO3dd8EgihxfKdIVki0vE"
 
@@ -60,7 +61,7 @@ def SendQuizStartNotification():
                       f"Ссылка: http://zuvs.ru/quiz/{quiz.pk}"
             logger.info("NOW ^^^")
             try:
-                asyncio.run(SendMessageToChannel(message))
+                asyncio.run(SendMessageWithImage(message, image=static('imgs/quiz_started.png')))
                 logger.info("MESSAGE SENT ^^^")
             except BaseException as e:
                 logger.info("ERROR")
@@ -69,3 +70,7 @@ def SendQuizStartNotification():
 
 async def SendMessageToChannel(message):
     await bot.send_message(chatID, message)
+
+
+async def SendMessageWithImage(message, image):
+    await bot.send_photo(chat_id=chatID, photo=image, caption=message)
