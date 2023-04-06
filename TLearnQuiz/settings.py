@@ -118,3 +118,8 @@ try:
     from .settings_local import *
 except ImportError:
     from .settings_prod import *
+
+
+CRONJOBS = [
+    ('*/1 * * * *', 'quiz.cron.SendQuizScheldue')
+]

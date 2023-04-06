@@ -143,6 +143,5 @@ def get_index(request):
             context['passedQuiz'].append(quiz)
     return render(request, 'index.html', context)
 
-
 def get_user_registed(request):
     return render(request, 'registDone.html', {})
