@@ -45,9 +45,10 @@ def SendQuizStartNotification():
 
     allQuiz = Quiz.objects.all()
     for quiz in allQuiz:
-        logger.info(f"Check -> {quiz.quizTitle}: {quiz.quizStartDate.time()} and now {datetime.datetime.now().time()}")
+
         startTime = quiz.quizStartDate.time()
         now = datetime.datetime.now().time()
+        logger.info(f"Check -> {quiz.quizTitle}: {quiz.quizStartDate.time()} and now {datetime.datetime.now().time()} => {startTime.hour}{startTime.minute} ~ {now.hour}{now.minute}")
         if f"{startTime.hour}{startTime.minute}" == f"{now.hour}{now.minute}":
             message = f"КВИЗ '{quiz.quizTitle}' НАЧАЛСЯ:\n" \
                       f"Скорее заходи и участвуй!\n" \
