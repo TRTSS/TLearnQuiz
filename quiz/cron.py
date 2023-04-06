@@ -15,12 +15,12 @@ def SendQuizScheldue():
 
     allQuiz = Quiz.objects.all()
     for quiz in allQuiz:
-        if quiz.quizStartDate > timezone.now():
+        if quiz.quizStartDate > timezone.now() and quiz.quizStartDate.date() == timezone.now().date():
             future.append(quiz)
 
-    message = f"Предстоящие сегодня квизы\n:"
+    message = f"Привет! Сегодня ({timezone.now().date()}) нас ждут следующие квизы:\n"
     for quiz in future:
-        message += f"\n**{quiz.quizTitle}**\nНачало: {quiz.quizStartDate} ({quiz.quizStartDate.day})\n"
+        message += f"\n**{quiz.quizTitle}**\nНачало: {quiz.quizStartDate.time()})\n"
 
     try:
         response = requests.post(apiURL, json={'chat_id': chatID, 'text': message})
