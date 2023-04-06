@@ -66,6 +66,7 @@ def SendQuizStartNotification():
             except BaseException as e:
                 logger.info("ERROR")
                 logger.info(e)
+                logger.info(static('imgs/quiz_started.png'))
 
 
 async def SendMessageToChannel(message):
