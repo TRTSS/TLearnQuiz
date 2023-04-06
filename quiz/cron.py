@@ -13,7 +13,7 @@ BOT_API_TOKEN = "5854080741:AAG5eK_jf5130SKO3dd8EgihxfKdIVki0vE"
 
 bot = Bot(token=BOT_API_TOKEN, parse_mode=types.ParseMode.HTML)
 chatID = '-1001883219679'
-
+host = "http://zuvs.ru"
 
 def SendQuizScheldue():
     apiToken = '5854080741:AAG5eK_jf5130SKO3dd8EgihxfKdIVki0vE'
@@ -61,12 +61,12 @@ def SendQuizStartNotification():
                       f"Ссылка: http://zuvs.ru/quiz/{quiz.pk}"
             logger.info("NOW ^^^")
             try:
-                asyncio.run(SendMessageWithImage(message, image=static('imgs/quiz_started.png')))
+                asyncio.run(SendMessageWithImage(message, image=host + static('imgs/quiz_started.png')))
                 logger.info("MESSAGE SENT ^^^")
             except BaseException as e:
                 logger.info("ERROR")
                 logger.info(e)
-                logger.info(static('imgs/quiz_started.png'))
+                logger.info(host + static('imgs/quiz_started.png'))
 
 
 async def SendMessageToChannel(message):
