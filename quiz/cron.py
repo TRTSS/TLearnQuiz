@@ -18,9 +18,14 @@ def SendQuizScheldue():
         if quiz.quizStartDate > timezone.now() and quiz.quizStartDate.date() == timezone.now().date():
             future.append(quiz)
 
-    message = f"Привет! Сегодня ({timezone.now().date()}) нас ждут следующие квизы:\n"
-    for quiz in future:
-        message += f"\n**{quiz.quizTitle}**\nНачало: {quiz.quizStartDate.time()})\n"
+    if len(future) > 0:
+        message = f"Привет! Сегодня ({timezone.now().date()}) нас ждут следующие квизы:\n"
+        for quiz in future:
+            message += f"\n**{quiz.quizTitle}**\nНачало: {quiz.quizStartDate.time()})\n"
+    else:
+        message = "Привет! Сегодня отдыхаем - сегодня квизов не будет.";
+
+    message += "\n(сообщение создано автоматически)"
 
     try:
         response = requests.post(apiURL, json={'chat_id': chatID, 'text': message})
