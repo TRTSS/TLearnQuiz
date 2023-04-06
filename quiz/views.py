@@ -24,7 +24,7 @@ def play_quiz(request, quizId):
     for i in Quiz.objects.filter(id=quizId).first().quizQuestions.all():
         context['corrects'].append(list(i.questionAnswers.all())[i.questionRightAnswerId].answerText)
         print(context['corrects'])
-    logger.debug ("HERE IT WORKS!")
+    logger.info("HERE IT WORKS!")
     return render(request, 'quiz.html', context)
 
 
