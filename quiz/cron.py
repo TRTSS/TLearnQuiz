@@ -1,3 +1,4 @@
+import datetime
 import logging
 
 import requests
@@ -44,8 +45,10 @@ def SendQuizStartNotification():
 
     allQuiz = Quiz.objects.all()
     for quiz in allQuiz:
-        logger.info(f"Check -> {quiz.quizTitle}: {quiz.quizStartDate.time()} and now {timezone.now().time()}")
-        if quiz.quizStartDate.time() == timezone.now().time():
+        logger.info(f"Check -> {quiz.quizTitle}: {quiz.quizStartDate.time()} and now {datetime.datetime.now().time()}")
+        startTime = quiz.quizStartDate.time()
+        now = datetime.datetime.now().time()
+        if f"{startTime.hour}{startTime.minute}" == f"{now.hour}{now.minute}":
             message = f"КВИЗ '{quiz.quizTitle}' НАЧАЛСЯ:\n" \
                       f"Скорее заходи и участвуй!\n" \
                       f"Ссылка: http://zuvs.ru/quiz/{quiz.pk}"
