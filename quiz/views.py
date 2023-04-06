@@ -7,7 +7,7 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
-
+import logging
 from TLearnQuiz.forms import NewUserForm
 
 from .models import Quiz, QuizResult
@@ -15,6 +15,7 @@ from .models import Quiz, QuizResult
 
 # Create your views here.
 def play_quiz(request, quizId):
+    logger = logging.getLogger(__name__)
     context = {'quizId': quizId}
     context['quizObj'] = Quiz.objects.filter(id=quizId).first()
     context['now'] = timezone.now()
@@ -23,7 +24,7 @@ def play_quiz(request, quizId):
     for i in Quiz.objects.filter(id=quizId).first().quizQuestions.all():
         context['corrects'].append(list(i.questionAnswers.all())[i.questionRightAnswerId].answerText)
         print(context['corrects'])
-    print ("HERE IT WORKS!")
+    logger.debug ("HERE IT WORKS!")
     return render(request, 'quiz.html', context)
 
 
