@@ -1,21 +1,20 @@
-import json
+import logging
 
+from django.contrib import messages
+from django.contrib.auth import login, authenticate
+from django.contrib.auth import logout
+from django.contrib.auth.forms import AuthenticationForm
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from django.contrib.auth import login, logout
-from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate
-import logging
-from TLearnQuiz.forms import NewUserForm
 
+from TLearnQuiz.forms import NewUserForm
 from .models import Quiz, QuizResult
 
 
 # Create your views here.
 def play_quiz(request, quizId):
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger('django')
     context = {'quizId': quizId}
     context['quizObj'] = Quiz.objects.filter(id=quizId).first()
     context['now'] = timezone.now()
@@ -24,7 +23,7 @@ def play_quiz(request, quizId):
     for i in Quiz.objects.filter(id=quizId).first().quizQuestions.all():
         context['corrects'].append(list(i.questionAnswers.all())[i.questionRightAnswerId].answerText)
         print(context['corrects'])
-    logging.info("HI DEBUG CAT! MEOW!")
+    logger.info("HI DEBUG CAT! MEOW!")
     return render(request, 'quiz.html', context)
 
 
