@@ -18,7 +18,9 @@ def SendQuizScheldue():
         if quiz.quizStartDate > timezone.now():
             future.append(quiz)
 
-    message = f"Cron message: {len(future)}"
+    message = f"Предстоящие сегодня квизы\n:"
+    for quiz in future:
+        message += f"\n**{quiz.quizTitle}**\nНачало: {quiz.quizStartDate} ({quiz.quizStartDate.day})\n"
 
     try:
         response = requests.post(apiURL, json={'chat_id': chatID, 'text': message})
