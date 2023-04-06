@@ -33,13 +33,18 @@ def SendQuizScheldue():
     except Exception as e:
         print(e)
 
-def SendQuizStartNotification ():
+
+def SendQuizStartNotification():
     apiToken = '5854080741:AAG5eK_jf5130SKO3dd8EgihxfKdIVki0vE'
     chatID = '-1001883219679'
     apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
 
+    logger = logging.getLogger('django')
+
+
     allQuiz = Quiz.objects.all()
     for quiz in allQuiz:
+        logger.info(f"Check -> {quiz.quizTitle}: {quiz.quizStartDate.time()} and now {timezone.now().time()}")
         if quiz.quizStartDate.time() == timezone.now().time():
             message = f"КВИЗ '{quiz.quizTitle}' НАЧАЛСЯ:\n" \
                       f"Скорее заходи и участвуй!\n" \
