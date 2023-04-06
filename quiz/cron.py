@@ -1,5 +1,6 @@
 import logging
 
+import requests
 from django.utils import timezone
 
 from quiz.models import Quiz
@@ -10,5 +11,17 @@ def SendQuizScheldue():
     chatID = '-1001883219679'
     apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
 
-    logger = logging.getLogger('django')
-    logger.info("CRON WORKS!")
+    future = []
+
+    allQuiz = Quiz.objects.all()
+    for quiz in allQuiz:
+        if quiz.quizStartDate > timezone.now():
+            future.append(quiz)
+
+    message = f"Cron message: {len(future)}"
+
+    try:
+        response = requests.post(apiURL, json={'chat_id': chatID, 'text': message})
+        print(response.text)
+    except Exception as e:
+        print(e)
