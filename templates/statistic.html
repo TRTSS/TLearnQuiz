@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ваша статистика</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'bootstrap-5.0.2-dist/css/bootstrap.css' %}" rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="{% static 'quizStyle.css' %}" rel="stylesheet">
+</head>
+<body style="overflow: hidden;">
+<div class="bg-rect-tl-1"></div>
+<div class="bg-rect-tl-2"></div>
+<div class="bg-rect-tl-3"></div>
+
+<div class="bg-rect-tr-1"></div>
+<div class="bg-rect-tr-2"></div>
+<div class="bg-rect-tr-3"></div>
+
+<div class="bg-rect-bl-1"></div>
+<div class="bg-rect-bl-2"></div>
+<div class="bg-rect-bl-3"></div>
+
+<div class="bg-rect-br-1"></div>
+<div class="bg-rect-br-2"></div>
+<div class="bg-rect-br-3"></div>
+
+<div class="fullpage">
+    <div class="quiz-block">
+        <div class="block-content">
+            <h1>Ваша статистика</h1>
+            
+        </div>
+        {% if not user.is_authenticated %}
+            <div class="block-content error">
+                <p><b>Статистика недоступна</b></p>
+                <p>Вы не авторизированны. <a href="{% url 'login' %}?redirect={{ request.get_full_path }}">Войдите в
+                    свой личный кабинет</a>.</p>
+            </div>
+        {% else %}
+            <div class="d-sm-flex justify-content-between">
+                <div class="block-content">
+                    <p>Вы поучаствовали в</p>
+                    <h2>{{ quizCount }}<span style="font-size: 16px"> квизах</span></h2>
+                </div>
+                <div class="block-content">
+                    <p>Ваш суммарный счет</p>
+                    <h2>{{ totalScores }}<span style="font-size: 16px"> очков</span></h2>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>

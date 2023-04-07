@@ -97,7 +97,7 @@ def get_quiz_leaders(request):
     if request.method == "POST":
         quizId = request.POST.get('quizId')
         results = QuizResult.objects.filter(quizRef=Quiz.objects.filter(id=quizId).first()).all().order_by('-scores')[
-                  :5]
+                  :10]
         board = {
             'all': {},
             'player': {}
@@ -144,5 +144,19 @@ def get_index(request):
             context['passedQuiz'].append(quiz)
     return render(request, 'index.html', context)
 
+
 def get_user_registed(request):
     return render(request, 'registDone.html', {})
+
+
+def user_stats(request):
+    context = {}
+    if request.user.is_authenticated:
+        userResults = QuizResult.objects.filter(quizUser=request.user)
+        context['quizCount'] = len(userResults)
+
+        totalScores = 0
+        for res in userResults:
+            totalScores += res.scores
+        context['totalScores'] = totalScores
+    return render(request, 'statistic.html', context)
