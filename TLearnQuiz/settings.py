@@ -140,7 +140,7 @@ except ImportError:
 
 
 CRONJOBS = [
-    ('50 10 * * *', 'quiz.cron.SendQuizScheldue'),
+    ('55 10 * * *', 'quiz.cron.SendQuizScheldue'),
     ('00 14 * * *', 'quiz.cron.SendQuizScheldue'),
     ('00 18 * * *', 'quiz.cron.SendQuizScheldue'),
     ('*/1 * * * *', 'quiz.cron.SendQuizStartNotification'),
