@@ -176,7 +176,7 @@
                         aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>1. У участника есть 15 секунд на дачу ответа на вопрос. По истечению времени вопрос пропускается
+                <p>1. У участника есть 20 секунд на дачу ответа на вопрос. По истечению времени вопрос пропускается
                     автоматически.</p>
                 <p>2. Максимальное кол-во очков за правильный ответ расчитывается по формуле <i><b>100 / кол-во вопросов
                     в квизе</b></i>.</p>
@@ -245,8 +245,8 @@
         }
     {% else %}
         // TIMER STUFF
-        let timeForAnswer = 10;
-        let timeLeft = 10;
+        let timeForAnswer = 20;
+        let timeLeft = 20;
         let timer = document.querySelector("#question-timer");
 
         // SCORES STUFF
@@ -376,9 +376,11 @@
                     let res = await SendResults(scores);
                     if (res.ok) {
                         statusLabel.classList.add("ok");
+                        statusLabel.classList.add("text-center");
                         statusLabel.innerHTML = "<span>Ваши результаты учтены <i class='bx bx-check' ></i></span>";
                     } else {
                         statusLabel.classList.add("error");
+                        statusLabel.classList.add("text-center");
                         statusLabel.innerHTML = `<span>Ваши результаты не учтены. Причина: ${res.verbose}</span>`;
                     }
                 } else {

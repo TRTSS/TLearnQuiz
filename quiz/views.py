@@ -1,4 +1,5 @@
 import logging
+import math
 
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
@@ -158,5 +159,38 @@ def user_stats(request):
         totalScores = 0
         for res in userResults:
             totalScores += res.scores
+
+        context['totalScoresPostfix'] = get_scores_postfix(totalScores)
         context['totalScores'] = totalScores
+
+        avScores = totalScores // len(userResults)
+        postfix = get_scores_postfix(avScores)
+        context['avScores'] = avScores
+        context['avScoresPostfix'] = postfix
+
+        context['currentLevel'], context['currentXP'], context['xpNeed'] = get_user_level_data(totalScores)
+
     return render(request, 'statistic.html', context)
+
+
+def get_scores_postfix(scores):
+    postfix = 'a'
+    if scores % 10 in [0, 5, 6, 7, 8, 9]:
+        postfix = 'ов'
+    elif scores % 10 == 1:
+        postfix = 'о'
+
+    return postfix
+
+
+def get_user_level_data(scores):
+    level = 0
+    xp = scores
+    xpNeed = 100
+    while xp >= xpNeed:
+        xp -= xpNeed
+        level += 1
+        xpNeed *= 1.03
+        xpNeed = math.ceil(xpNeed)
+
+    return level, xp, xpNeed

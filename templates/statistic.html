@@ -27,11 +27,27 @@
 <div class="bg-rect-br-2"></div>
 <div class="bg-rect-br-3"></div>
 
+<style>
+    .xpbar-back {
+        width: 100%;
+        background: #0c63e4;
+        height: 15px;
+        border-radius: 50px;
+    }
+
+    .xpbar {
+        width: {{ currentXP }}%;
+        background: white;
+        height: 15px;
+        border-radius: 50px;
+    }
+</style>
+
 <div class="fullpage">
     <div class="quiz-block">
         <div class="block-content">
-            <h1>Ваша статистика</h1>
-            
+            <h1>🏆 Ваша статистика</h1>
+
         </div>
         {% if not user.is_authenticated %}
             <div class="block-content error">
@@ -47,12 +63,31 @@
                 </div>
                 <div class="block-content">
                     <p>Ваш суммарный счет</p>
-                    <h2>{{ totalScores }}<span style="font-size: 16px"> очков</span></h2>
+                    <h2>{{ totalScores }}<span style="font-size: 16px"> очк{{ totalScoresPostfix }}</span></h2>
                 </div>
+                <div class="block-content">
+                    <p>Ваш средний счет</p>
+                    <h2>{{ avScores }}<span style="font-size: 16px"> очк{{ avScoresPostfix }}</span></h2>
+                </div>
+            </div>
+            <div class="block-content">
+                <h2>Ваш уровень</h2>
+
+                <p>Уровень {{ currentLevel }}</p>
+                <div class="xpbar-back">
+                    <div class="xpbar">
+
+                    </div>
+                </div>
+                <p>{{ currentXP }} / {{ xpNeed }}</p>
             </div>
         {% endif %}
     </div>
 </div>
+
+<script>
+
+</script>
 
 </body>
 </html>
