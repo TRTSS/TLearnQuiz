@@ -15,6 +15,7 @@ bot = Bot(token=BOT_API_TOKEN, parse_mode=types.ParseMode.HTML)
 chatID = '-1001883219679'
 host = "http://zuvs.ru"
 
+
 def SendQuizScheldue():
     apiToken = '5854080741:AAG5eK_jf5130SKO3dd8EgihxfKdIVki0vE'
     apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
@@ -22,6 +23,8 @@ def SendQuizScheldue():
     logger = logging.getLogger('django')
     future = []
     message = ""
+    logger.info(f"Cron start schedule")
+    logger.info(f"Start with {__name__}")
 
     allQuiz = Quiz.objects.all()
     for quiz in allQuiz:
