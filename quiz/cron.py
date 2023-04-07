@@ -19,7 +19,9 @@ def SendQuizScheldue():
     apiToken = '5854080741:AAG5eK_jf5130SKO3dd8EgihxfKdIVki0vE'
     apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
 
+    logger = logging.getLogger('django')
     future = []
+    message = ""
 
     allQuiz = Quiz.objects.all()
     for quiz in allQuiz:
@@ -38,7 +40,7 @@ def SendQuizScheldue():
     try:
         asyncio.run(SendMessageToChannel(message))
     except Exception as e:
-        print(e)
+        logger.info(f"Error with {__name__}: {e}")
 
 
 def SendQuizStartNotification():
