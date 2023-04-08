@@ -333,7 +333,7 @@
             questionList.push("{{ q.questionText }}");
             {% for a in q.questionAnswers.all %}
                 answers.push("{{ a.answerText }}");
-            {% endfor %
+            {% endfor %}
         {% endfor %}
 
         {% for c in corrects %}
