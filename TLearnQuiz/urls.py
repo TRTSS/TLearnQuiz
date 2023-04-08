@@ -30,5 +30,5 @@ urlpatterns = [
     path('api/send_quiz_result', send_quiz_result, name='apiSendQuizResult'),
     path('api/get_quiz_leaders', get_quiz_leaders, name='apiGetQuizLeaders'),
     path('registed', get_user_registed, name='registed'),
-    # path('stats', user_stats, name='stats')
+    path('stats', user_stats, name='stats')
 ]
