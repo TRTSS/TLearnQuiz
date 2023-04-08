@@ -270,7 +270,6 @@
         {% if now >= quizObj.quizEndDate %}
             document.querySelector("#welcome-area").style.display = "none";
             document.querySelector("#welcome-area").classList.remove("d-sm-flex");
-            console.log(document.querySelector("#welcome-area"));
 
             document.querySelector("#quiz-finished-area").style.display = "block";
         {% endif %}
@@ -334,13 +333,11 @@
             questionList.push("{{ q.questionText }}");
             {% for a in q.questionAnswers.all %}
                 answers.push("{{ a.answerText }}");
-            {% endfor %}
-            console.log("{{ q.questionText }}");
+            {% endfor %
         {% endfor %}
 
         {% for c in corrects %}
-            corrects.push("{{ c|safe }}");
-            console.log("Correct: {{ c|safe }}");
+            corrects.push(`{{ c|safe }}`);
         {% endfor %}
 
         async function SetCurrentQuestion() {
@@ -361,14 +358,14 @@
                     }
 
                     quizEnd.play();
-                    console.log("RESULT: " + String(playerRes));
+
                     document.querySelector("#quiz-result-area").innerHTML = `${playerRes} / ${corrects.length}`;
                     document.querySelector("#quiz-scores-area").innerHTML = `Вы набрали ${scores} очков`;
 
                     document.querySelector("#quiz-area").style.display = "none";
                     document.querySelector("#question-timer").style.display = "none";
                     document.querySelector("#quiz-end-area").style.display = "block";
-                    console.log(playerAnswers);
+
 
                     let statusLabel = document.querySelector("#sending-res-status-area");
                     statusLabel.innerHTML = "<span class='text-muted'>Отправляем данные... <i class='bx bx-loader-circle bx-spin' ></i></span>";
@@ -390,8 +387,8 @@
                     timerInterval = setInterval(() => {
                         timeLeft -= 10 / 1000
                         timer.style.width = String(100 / timeForAnswer * timeLeft) + "%";
-                        console.log(document.querySelector('.quiz-answer-glow'));
-                        console.log(360 / timeForAnswer * timeLeft);
+
+
                         document.querySelector('.quiz-answer-timer').style.background = `conic-gradient(white ${360 - 360 / timeForAnswer * timeLeft}deg, #316BFF ${360 - 360 / timeForAnswer * timeLeft}deg 360deg)`;
                         if (currentScoresReward > Math.floor(scoresForQuestion / 2)) {
                             currentScoresReward = Math.floor(scoresForQuestion - (scoresForQuestion / 2 / timeForAnswer * (timeForAnswer - timeLeft)));
@@ -482,12 +479,12 @@
 
     async function ShowLeaderTable() {
         let board = await GetQuizLeaders();
-        console.log(board);
+
         let boardTable = document.querySelector("#leader-board");
 
         let place = 1;
 
-        console.log(board.data.all);
+
 
         for (var k in board.data.all) {
             let cl = '';
