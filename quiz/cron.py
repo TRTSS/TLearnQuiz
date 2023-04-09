@@ -53,7 +53,8 @@ def SendQuizStartNotification():
 
     logger = logging.getLogger('django')
 
-    allQuiz = Quiz.objects.filter(quizStartDate__date = timezone.now().date())
+    # quizStartDate__date = timezone.now().date()
+    allQuiz = Quiz.objects.all()
     if len(allQuiz) == 0:
         logger.info("There is now quiz today")
     for quiz in allQuiz:
@@ -74,6 +75,11 @@ def SendQuizStartNotification():
                 logger.info("ERROR")
                 logger.info(e)
                 logger.info(host + static('imgs/quiz_started.png'))
+
+
+def GetTimeCode(quizDatetime):
+    h = str(quizDatetime.hour)
+    m = str(quizDatetime.minute)
 
 
 async def SendMessageToChannel(message):
