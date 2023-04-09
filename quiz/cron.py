@@ -59,7 +59,7 @@ def SendQuizStartNotification():
         startTime = timezone.localtime(quiz.quizStartDate).time()
         now = datetime.datetime.now().time()
         logger.info(
-            f"Check -> {quiz.quizTitle}: {startTime} and now {now} => {startTime.hour}{startTime.minute} ~ {now.hour}{now.minute}")
+            f"Check -> {quiz.quizTitle}: {startTime} and now {now} => {startTime.hour}{startTime.minute} ~ {now.hour}{now.minute} => {quiz.quizStartDate.date()} ~ {timezone.now().date()} ")
         if f"{startTime.hour}{startTime.minute}" == f"{now.hour}{now.minute}" and quiz.quizStartDate.date() == timezone.now().date():
             message = f"КВИЗ '{quiz.quizTitle}' НАЧАЛСЯ:\n" \
                       f"Скорее заходи и участвуй!\n" \

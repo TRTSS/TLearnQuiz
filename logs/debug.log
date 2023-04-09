@@ -1,0 +1,374 @@
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 1515
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 304 0
+"GET /static/quizStyle.css HTTP/1.1" 304 0
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3428
+"GET /quiz/2 HTTP/1.1" 200 20824
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/get_quiz_leaders HTTP/1.1" 200 195
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\TLearnQuiz\settings.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\TLearnQuiz\settings.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+HI DEBUG CAT! MEOW!
+"GET /quiz/2 HTTP/1.1" 200 20824
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/get_quiz_leaders HTTP/1.1" 200 195
+HI DEBUG CAT! MEOW!
+"GET /quiz/2 HTTP/1.1" 200 20824
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/get_quiz_leaders HTTP/1.1" 200 195
+D:\TLearnQuiz\TLearnQuiz\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 1515
+"GET /static/quizStyle.css HTTP/1.1" 200 8744
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 200 195704
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET /sandbox HTTP/1.1" 200 2470
+"GET /static/effects/effects.css HTTP/1.1" 200 538
+"GET /static/js/effects.js HTTP/1.1" 200 9683
+"GET /stats HTTP/1.1" 200 1158
+HI DEBUG CAT! MEOW!
+"GET /quiz/2 HTTP/1.1" 200 20824
+"GET /static/bootstrap-5.0.2-dist/js/bootstrap.js HTTP/1.1" 200 148578
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/get_quiz_leaders HTTP/1.1" 200 195
+HI DEBUG CAT! MEOW!
+"GET /quiz/3 HTTP/1.1" 200 22729
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/get_quiz_leaders HTTP/1.1" 200 150
+"GET /login?auto=logout HTTP/1.1" 301 0
+"GET /login/?auto=logout HTTP/1.1" 200 2173
+"GET /stats HTTP/1.1" 200 1431
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /stats HTTP/1.1" 200 1447
+"GET /login/?redirect=/stats HTTP/1.1" 200 2173
+"POST /login/?redirect=/stats HTTP/1.1" 200 2173
+"POST /login/?redirect=/stats HTTP/1.1" 200 2173
+"POST /login/?redirect=/stats HTTP/1.1" 302 0
+"GET /stats HTTP/1.1" 200 1361
+"GET /stats HTTP/1.1" 200 1361
+"GET /stats HTTP/1.1" 200 1642
+"GET /stats HTTP/1.1" 200 1666
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /stats HTTP/1.1" 200 1666
+"GET /stats HTTP/1.1" 200 1578
+D:\TLearnQuiz\TLearnQuiz\urls.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /stats
+"GET /stats HTTP/1.1" 404 3410
+Not Found: /stats
+"GET /stats HTTP/1.1" 404 3410
+D:\TLearnQuiz\TLearnQuiz\urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /stats HTTP/1.1" 200 1771
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /stats HTTP/1.1" 200 1768
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /stats HTTP/1.1" 200 1768
+"GET /admin/ HTTP/1.1" 200 9163
+"GET /static/admin/css/base.css HTTP/1.1" 304 0
+"GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+"GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+"GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+"GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+"GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+"GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+"GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+"GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+"GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+"GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+"GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+"GET /admin/quiz/quiz/ HTTP/1.1" 200 8912
+"GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+"GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+"GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+"GET /static/admin/js/core.js HTTP/1.1" 304 0
+"GET /static/admin/js/actions.js HTTP/1.1" 304 0
+"GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+"GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+"GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+"GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+"GET /admin/jsi18n/ HTTP/1.1" 200 16066
+"GET /static/admin/js/filters.js HTTP/1.1" 304 0
+"GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+"GET /admin/quiz/quizresult/ HTTP/1.1" 200 10917
+"GET /admin/jsi18n/ HTTP/1.1" 200 16066
+"GET /admin/quiz/quizresult/20/change/ HTTP/1.1" 200 11809
+"GET /static/admin/css/forms.css HTTP/1.1" 304 0
+"GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+"GET /admin/jsi18n/ HTTP/1.1" 200 16066
+"GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+"GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+"GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+"POST /admin/quiz/quizresult/20/change/ HTTP/1.1" 302 0
+"GET /admin/quiz/quizresult/ HTTP/1.1" 200 11195
+"GET /admin/jsi18n/ HTTP/1.1" 200 16066
+"GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+"GET /stats HTTP/1.1" 200 1766
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 1515
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /stats HTTP/1.1" 200 1766
+"GET /stats HTTP/1.1" 200 2144
+"GET /stats HTTP/1.1" 200 2145
+"GET /stats HTTP/1.1" 200 2265
+"GET /stats HTTP/1.1" 200 2266
+"GET /stats HTTP/1.1" 200 2266
+"GET /stats HTTP/1.1" 200 2266
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /stats HTTP/1.1" 200 2286
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /stats HTTP/1.1" 200 2327
+"GET /stats HTTP/1.1" 200 2359
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /stats HTTP/1.1" 200 2391
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /stats HTTP/1.1" 200 2357
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\TLearnQuiz\quiz\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /stats HTTP/1.1" 200 2357
+"GET /stats HTTP/1.1" 200 2362
+D:\TLearnQuiz\quiz\models.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 1515
+"GET / HTTP/1.1" 200 1515
+"GET /static/quizStyle.css HTTP/1.1" 304 0
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET /regist/ HTTP/1.1" 200 3672
+"GET /regist/ HTTP/1.1" 200 3713
+"GET /admin/ HTTP/1.1" 200 9214
+"GET /admin/ HTTP/1.1" 200 9214
+"GET /admin/quiz/quiz/ HTTP/1.1" 200 8912
+"GET /admin/jsi18n/ HTTP/1.1" 200 16066
+"GET /admin/quiz/quiz/5/change/ HTTP/1.1" 200 11765
+"GET /admin/jsi18n/ HTTP/1.1" 200 16066
+"GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 304 0
+"GET /static/admin/js/calendar.js HTTP/1.1" 304 0
+"GET /static/admin/img/icon-clock.svg HTTP/1.1" 304 0
+"GET /static/admin/img/icon-calendar.svg HTTP/1.1" 304 0
+"POST /admin/quiz/quiz/5/change/ HTTP/1.1" 302 0
+"GET /admin/quiz/quiz/ HTTP/1.1" 200 9153
+"GET /admin/jsi18n/ HTTP/1.1" 200 16066
+"GET / HTTP/1.1" 200 1637
+HI DEBUG CAT! MEOW!
+"GET /quiz/5 HTTP/1.1" 200 22254
+"GET /static/bootstrap-5.0.2-dist/js/bootstrap.js.map HTTP/1.1" 200 290309
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/get_quiz_leaders HTTP/1.1" 200 239
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 1637
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+HI DEBUG CAT! MEOW!
+"GET /quiz/5 HTTP/1.1" 200 22254
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/get_quiz_leaders HTTP/1.1" 200 239
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/send_quiz_result HTTP/1.1" 200 164
+HI DEBUG CAT! MEOW!
+"GET /quiz/5 HTTP/1.1" 200 22254
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/get_quiz_leaders HTTP/1.1" 200 239
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+"POST /api/check_access_to_quiz HTTP/1.1" 200 12
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET / HTTP/1.1" 200 1515
+"GET /stats HTTP/1.1" 200 3117
+"GET /static/3d/cup1.gltf HTTP/1.1" 200 571915
+"GET /stats HTTP/1.1" 200 3117
+"GET /static/3d/cup1.gltf HTTP/1.1" 304 0
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 1515
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 304 0
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET /stats HTTP/1.1" 200 3117
+"GET /static/3d/cup1.gltf HTTP/1.1" 304 0
+"GET /stats HTTP/1.1" 200 3117
+"GET /stats HTTP/1.1" 200 3117
+"GET /static/quizStyle.css HTTP/1.1" 200 8744
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 200 195704
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET /stats HTTP/1.1" 200 3117
+"GET /static/quizStyle.css HTTP/1.1" 200 8744
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 200 195704
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET /stats HTTP/1.1" 200 3117
+"GET /static/quizStyle.css HTTP/1.1" 200 8744
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 200 195704
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET /stats HTTP/1.1" 200 3117
+"GET /static/quizStyle.css HTTP/1.1" 200 8744
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 200 195704
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+Watching for file changes with StatReloader
+"GET /stats HTTP/1.1" 200 3117
+"GET /stats HTTP/1.1" 200 3117
+"GET /stats HTTP/1.1" 200 3117
+"GET /stats HTTP/1.1" 200 3117
+"GET /stats HTTP/1.1" 200 3117
+"GET /stats HTTP/1.1" 200 3117
+"GET /stats HTTP/1.1" 200 3117
+"GET /static/quizStyle.css HTTP/1.1" 200 8744
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 200 195704
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET /stats HTTP/1.1" 200 3117
+"GET /static/quizStyle.css HTTP/1.1" 200 8744
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 200 195704
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET /stats HTTP/1.1" 200 3117
+"GET /static/quizStyle.css HTTP/1.1" 200 8744
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 200 195704
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET /stats HTTP/1.1" 200 3097
+"GET /stats HTTP/1.1" 200 3117
+Watching for file changes with StatReloader
+"GET /stats HTTP/1.1" 200 3121
+"GET /static/3d/trphy1.gltf HTTP/1.1" 200 25840824
+"GET /stats HTTP/1.1" 200 3135
+"GET /static/3d/trphy1.gltf HTTP/1.1" 304 0
+"GET /stats HTTP/1.1" 200 3135
+"GET /static/quizStyle.css HTTP/1.1" 200 8744
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 200 195704
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET /stats HTTP/1.1" 200 3135
+"GET /static/quizStyle.css HTTP/1.1" 200 8744
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 200 195704
+"GET /static/3d/trphy1.gltf HTTP/1.1" 304 0
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET /stats HTTP/1.1" 200 3135
+"GET /static/quizStyle.css HTTP/1.1" 200 8744
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 200 195704
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET /stats HTTP/1.1" 200 3135
+"GET /static/quizStyle.css HTTP/1.1" 200 8744
+"GET /static/bootstrap-5.0.2-dist/css/bootstrap.css HTTP/1.1" 200 195704
+"GET /static/3d/trphy1.gltf HTTP/1.1" 200 25840824
+"GET /stats HTTP/1.1" 200 3122
+"GET /static/3d/trphy1.gltf HTTP/1.1" 304 0
+"GET /stats HTTP/1.1" 200 3109
+"GET /static/3d/trphy1.gltf HTTP/1.1" 304 0
+"GET /stats HTTP/1.1" 200 3135
+"GET /stats HTTP/1.1" 200 3136
+"GET /stats HTTP/1.1" 200 3142
+"GET /static/3d/trphy1.gltf HTTP/1.1" 304 0
+"GET /stats HTTP/1.1" 200 3142
+"GET /stats HTTP/1.1" 200 3142
+"GET /stats HTTP/1.1" 200 3142
+"GET /static/3d/trphy1.gltf HTTP/1.1" 304 0
+"GET /stats HTTP/1.1" 200 3157
+"GET /stats HTTP/1.1" 200 3157
+"GET /stats HTTP/1.1" 200 3165
+"GET /static/3d/bubbleCup1.gltf HTTP/1.1" 200 35541
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 1515
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3547
+"GET /admin/ HTTP/1.1" 200 9228
+"GET /static/admin/css/base.css HTTP/1.1" 304 0
+"GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+"GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+"GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+"GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+"GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+"GET /admin/ HTTP/1.1" 200 9228
+"GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+"GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+"GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+"GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+"GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+"GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+"GET /admin/quiz/quiz/ HTTP/1.1" 200 8912
+"GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+"GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+"GET /static/admin/js/actions.js HTTP/1.1" 304 0
+"GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+"GET /static/admin/js/core.js HTTP/1.1" 304 0
+"GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+"GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+"GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+"GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+"GET /static/admin/js/filters.js HTTP/1.1" 304 0
+"GET /admin/jsi18n/ HTTP/1.1" 200 16066
+"GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+"GET /admin/quiz/quiz/5/change/ HTTP/1.1" 200 11765
+"GET /static/admin/css/forms.css HTTP/1.1" 304 0
+"GET /admin/jsi18n/ HTTP/1.1" 200 16066
+"GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+"GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+"GET /static/admin/js/change_form.js HTTP/1.1" 304 0
