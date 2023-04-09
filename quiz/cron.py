@@ -59,11 +59,11 @@ def SendQuizStartNotification():
         logger.info("There is now quiz today")
     for quiz in allQuiz:
         logger.info(f"Checking {quiz.quizTitle}")
-        startTime = timezone.localtime(quiz.quizStartDate).time()
-        now = datetime.datetime.now().time()
+        startTime = GetTimeCode(timezone.localtime(quiz.quizStartDate).time())
+        now = GetTimeCode(datetime.datetime.now().time())
         logger.info(
-            f"Check -> {quiz.quizTitle}: {startTime} and now {now} => {startTime.hour}{startTime.minute} ~ {now.hour}{now.minute} => {quiz.quizStartDate.date()} ~ {timezone.now().date()} ")
-        if f"{startTime.hour}{startTime.minute}" == f"{now.hour}{now.minute}" and quiz.quizStartDate.date() == timezone.now().date():
+            f"Check -> {quiz.quizTitle}: {startTime} and now {now} => {startTime} ~ {now} => {quiz.quizStartDate.date()} ~ {timezone.now().date()} ")
+        if startTime == now and quiz.quizStartDate.date() == timezone.now().date():
             message = f"КВИЗ '{quiz.quizTitle}' НАЧАЛСЯ:\n" \
                       f"Скорее заходи и участвуй!\n" \
                       f"Ссылка: http://zuvs.ru/quiz/{quiz.pk}"
@@ -80,6 +80,11 @@ def SendQuizStartNotification():
 def GetTimeCode(quizDatetime):
     h = str(quizDatetime.hour)
     m = str(quizDatetime.minute)
+    if len(h) == 1:
+        h = "0" + h
+    if len(m) == 1:
+        m = "0" + m
+    return h + m
 
 
 async def SendMessageToChannel(message):
