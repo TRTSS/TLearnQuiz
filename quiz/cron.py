@@ -53,8 +53,7 @@ def SendQuizStartNotification():
 
     logger = logging.getLogger('django')
 
-    # quizStartDate__date = timezone.now().date()
-    allQuiz = Quiz.objects.all()
+    allQuiz = Quiz.objects.filter(quizStartDate__date=timezone.now().date())
     if len(allQuiz) == 0:
         logger.info("There is now quiz today")
     for quiz in allQuiz:
