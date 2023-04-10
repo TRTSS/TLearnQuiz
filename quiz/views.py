@@ -7,6 +7,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.templatetags.static import static
 from django.utils import timezone
 
 from TLearnQuiz.forms import NewUserForm
@@ -169,6 +170,7 @@ def user_stats(request):
         context['avScoresPostfix'] = postfix
 
         context['currentLevel'], context['currentXP'], context['xpNeed'] = get_user_level_data(totalScores)
+        context['leagueBadge'] = static(f"3d/cups/circleCup{1 + context['currentLevel'] // 10}.gltf")
 
     return render(request, 'statistic.html', context)
 
@@ -194,3 +196,12 @@ def get_user_level_data(scores):
         xpNeed = math.ceil(xpNeed)
 
     return level, xp, xpNeed
+
+
+def get_user_level_data_api(request):
+    userResults = QuizResult.objects.filter(quizUser=request.user)
+    totalScores = 0
+    for res in userResults:
+        totalScores += res.scores
+    level, xp, xpNeed = get_user_level_data(totalScores)
+    return JsonResponse({'level': level, 'xp': xp, 'xpNeed': xpNeed})

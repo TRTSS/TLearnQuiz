@@ -30,19 +30,7 @@
 <div class="bg-rect-br-3"></div>
 
 <style>
-    .xpbar-back {
-        width: 100%;
-        background: #0c63e4;
-        height: 15px;
-        border-radius: 50px;
-    }
 
-    .xpbar {
-        width: {{ currentXP }}%;
-        background: white;
-        height: 15px;
-        border-radius: 50px;
-    }
 </style>
 
 <div class="fullpage">
@@ -79,7 +67,7 @@
 
                 <div class="text-center" style="height: 300%">
                     <p><b>Бронзовая лига</b></p>
-                    <model-viewer style='width: 100%; height: 400px;' src="{% static '3d/bubbleCup1.gltf' %}" alt="VR Headset" auto-rotate camera-controls ar ios-src="{% static '3d/bubbleCup1.gltf' %}"></model-viewer>
+                    <model-viewer style='width: 100%; height: 300px;' src="{{ leagueBadge }}" alt="VR Headset" auto-rotate camera-controls ar ios-src="{{ leagueBadge }}"></model-viewer>
                 </div>
                 <div class="text-center" style="width: 100%;">
 
@@ -97,9 +85,14 @@
     </div>
 </div>
 
+<div class="quiz-popup" id="quiz-popup" style="display: none;">
+    <p><b>Quiz Popup</b></p>
+    <p>Текст сообщения</p>
+</div>
+
+<script src="{% static 'js/QuizPopup.js' %}"></script>
 <script>
-
+    document.querySelector('.xpbar').style.width = String(100 / {{ xpNeed }} * {{ currentXP }}) + "%";
 </script>
-
 </body>
 </html>

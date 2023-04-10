@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from quiz.views import play_quiz, register_request, login_request, check_access_to_quiz, send_quiz_result, \
-    get_quiz_leaders, bot_connection, get_index, get_effects_sandbox, get_user_registed, user_stats
+    get_quiz_leaders, bot_connection, get_index, get_effects_sandbox, get_user_registed, user_stats, \
+    get_user_level_data_api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +30,7 @@ urlpatterns = [
     path('api/check_access_to_quiz', check_access_to_quiz, name='apiCheckAccessToQuiz'),
     path('api/send_quiz_result', send_quiz_result, name='apiSendQuizResult'),
     path('api/get_quiz_leaders', get_quiz_leaders, name='apiGetQuizLeaders'),
+    path('api/get_user_level_data', get_user_level_data_api, name='apiUserLeveldata'),
     path('registed', get_user_registed, name='registed'),
     path('stats', user_stats, name='stats')
 ]
