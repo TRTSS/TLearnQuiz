@@ -195,7 +195,7 @@ def get_user_level_data(scores):
         xpNeed *= 1.03
         xpNeed = math.ceil(xpNeed)
 
-    return level, xp, xpNeed
+    return level+1, xp, xpNeed
 
 
 def get_user_level_data_api(request):
