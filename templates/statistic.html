@@ -105,12 +105,12 @@
         src.classList.add('disabled');
         let resp = await fetch('{% url 'statsDownload' %}');
         let res = await resp.json();
-        alert (res.url);
         src.innerHTML = "Скачать статистику";
         src.classList.remove('disabled');
         const anchor = document.createElement('a');
+        anchor.setAttribute('download', '');
         anchor.href = res.url;
-        anchor.download = "Ваша статистика TLearnQUIZ";
+        anchor.download = "Ваша статистика TLearnQUIZ.png";
         document.body.appendChild(anchor);
         anchor.click();
         document.body.removeChild(anchor);
