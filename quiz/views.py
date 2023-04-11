@@ -1,7 +1,6 @@
 import logging
 import math
 import requests
-from html2image import Html2Image
 
 import imgkit
 
@@ -233,7 +232,6 @@ def get_stats_img(request):
     if len(userResults) > 0:
         avScores = round(totalScores / len(userResults))
 
-    hti = Html2Image(output_path=os.path.join(django_settings.STATIC_ROOT, 'imgs/usersStats/'))
     html = f"<script type='module' src='https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js'></script>" \
            f"<script nomodule src='https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js'></script>" \
            f"<div class='holder'>" \
@@ -280,7 +278,6 @@ def get_stats_img(request):
     }
 
     image = requests.post(url=HCTI_API_ENDPOINT, data=data, auth=(HCTI_API_USER_ID, HCTI_API_KEY))
-
 
     return JsonResponse({
         'url': image.json()['url']
