@@ -1,6 +1,8 @@
 import logging
 import math
 
+from html2image import Html2Image
+
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import logout
@@ -12,6 +14,9 @@ from django.utils import timezone
 
 from TLearnQuiz.forms import NewUserForm
 from .models import Quiz, QuizResult
+from django.conf import settings as django_settings
+import os
+from django.template.loader import render_to_string
 
 
 # Create your views here.
@@ -164,7 +169,10 @@ def user_stats(request):
         context['totalScoresPostfix'] = get_scores_postfix(totalScores)
         context['totalScores'] = totalScores
 
-        avScores = totalScores // len(userResults)
+        if len(userResults) > 0:
+            avScores = totalScores // len(userResults)
+        else:
+            avScores = 0
         postfix = get_scores_postfix(avScores)
         context['avScores'] = avScores
         context['avScoresPostfix'] = postfix
@@ -195,13 +203,70 @@ def get_user_level_data(scores):
         xpNeed *= 1.03
         xpNeed = math.ceil(xpNeed)
 
-    return level+1, xp, xpNeed
+    return level + 1, xp, xpNeed
 
 
 def get_user_level_data_api(request):
+    offset = 0
+    if request.method == "GET":
+        if request.GET.get('offset') is not None:
+            offset = int(request.GET.get('offset'))
     userResults = QuizResult.objects.filter(quizUser=request.user)
     totalScores = 0
     for res in userResults:
         totalScores += res.scores
-    level, xp, xpNeed = get_user_level_data(totalScores)
+    level, xp, xpNeed = get_user_level_data(totalScores - offset)
     return JsonResponse({'level': level, 'xp': xp, 'xpNeed': xpNeed})
+
+
+def get_stats_img(request):
+    userResults = QuizResult.objects.filter(quizUser=request.user)
+    totalScores = 0
+    for res in userResults:
+        totalScores += res.scores
+
+    level, xp, xpNeed = get_user_level_data(totalScores)
+
+    avScores = 0
+    if len(userResults) > 0:
+        avScores = round(totalScores / len(userResults))
+
+    hti = Html2Image(output_path=os.path.join(django_settings.STATIC_ROOT, 'imgs/usersStats/'))
+    html = f"<script type='module' src='https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js'></script>" \
+           f"<script nomodule src='https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js'></script>" \
+           f"<h1>Моя статистика TLearnQUIZ</h1><p>{request.user.username}</p>" \
+           f"<div class='flex-holder'><div class='block-content'><p>Я участвовал в</p><h2>" \
+           f"{len(userResults)}<span style='font-size: 16px'> квизах</span></h2></div><div " \
+           f"class='block-content'><p>Мой суммарный счёт</p><h2>{totalScores}<span style='font-size: 16px'> очк" \
+           f"{get_scores_postfix(totalScores)}</span></h2></div><div class='block-content'><p>Мой средний счёт</p><h2>{avScores}" \
+           f"<span style='font-size: 16px'> очк{get_scores_postfix(avScores)}</span></h2></div></div>" \
+           f"<div class='flex-holder'>" \
+           f"<img src='http://127.0.0.1:8000/static/imgs/cups/circleCup{str(1 + level // 10)}.png' style='position: realative; width: 50%;'>" \
+           f"<div>" \
+           f"<h2>Участвуй в квизах вместе со мной!</h2>" \
+           f"<p>Переходи в телеграмм канал: <i>t.me/tlearn_quiz</i> и участвуй в коротких ежедневных викторинах!</p>" \
+           f"</div>" \
+           f"</div>"
+
+    css = "@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display" \
+          "=swap'); body {background: #316BFF; color: white; padding: 30px; font-family: 'Manrope', sans-serif;} " \
+          ".flex-holder {" \
+          "display: flex;" \
+          "flex-direction: row;" \
+          "justify-content: space-around;" \
+          "}" \
+          ".block-content {" \
+          "text-align: left !important;" \
+          "padding: 25px;" \
+          "background: rgba(255, 255, 255, 0.3);" \
+          "border-radius: 30px;" \
+          "margin: 10px;" \
+          "}"
+    hti.screenshot(html_str=html, css_str=css, save_as=f'{request.user.username}.jpg', size=(1600, 1200))
+    return JsonResponse({
+        'url': os.path.join(django_settings.STATIC_ROOT, 'imgs/usersStats/') + f'{request.user.username}.jpg'
+    })
+
+
+def get_stats_img_template(request):
+    return render(request, 'statsDownloadTemplate.html', {})

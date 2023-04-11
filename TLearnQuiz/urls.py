@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from quiz.views import play_quiz, register_request, login_request, check_access_to_quiz, send_quiz_result, \
     get_quiz_leaders, bot_connection, get_index, get_effects_sandbox, get_user_registed, user_stats, \
-    get_user_level_data_api
+    get_user_level_data_api, get_stats_img, get_stats_img_template
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,5 +32,7 @@ urlpatterns = [
     path('api/get_quiz_leaders', get_quiz_leaders, name='apiGetQuizLeaders'),
     path('api/get_user_level_data', get_user_level_data_api, name='apiUserLeveldata'),
     path('registed', get_user_registed, name='registed'),
-    # path('stats', user_stats, name='stats')
+    path('stats', user_stats, name='stats'),
+    path('stats/download', get_stats_img, name='statsDownload'),
+    path('stats/download/template', get_stats_img_template, name='statsImagesTemplate')
 ]
