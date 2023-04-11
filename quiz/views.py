@@ -1,7 +1,9 @@
 import logging
 import math
-
+import requests
 from html2image import Html2Image
+
+import imgkit
 
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
@@ -234,6 +236,7 @@ def get_stats_img(request):
     hti = Html2Image(output_path=os.path.join(django_settings.STATIC_ROOT, 'imgs/usersStats/'))
     html = f"<script type='module' src='https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js'></script>" \
            f"<script nomodule src='https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js'></script>" \
+           f"<div class='holder'>" \
            f"<h1>Моя статистика TLearnQUIZ</h1><p>{request.user.username}</p>" \
            f"<div class='flex-holder'><div class='block-content'><p>Я участвовал в</p><h2>" \
            f"{len(userResults)}<span style='font-size: 16px'> квизах</span></h2></div><div " \
@@ -241,10 +244,11 @@ def get_stats_img(request):
            f"{get_scores_postfix(totalScores)}</span></h2></div><div class='block-content'><p>Мой средний счёт</p><h2>{avScores}" \
            f"<span style='font-size: 16px'> очк{get_scores_postfix(avScores)}</span></h2></div></div>" \
            f"<div class='flex-holder'>" \
-           f"<img src='http://127.0.0.1:8000/static/imgs/cups/circleCup{str(1 + level // 10)}.png' style='position: realative; width: 50%;'>" \
+           f"<img src='http://zuvs.ru/static/imgs/cups/circleCup{str(1 + level // 10)}.png' style='position: realative; width: 50%;'>" \
            f"<div>" \
            f"<h2>Участвуй в квизах вместе со мной!</h2>" \
            f"<p>Переходи в телеграмм канал: <i>t.me/tlearn_quiz</i> и участвуй в коротких ежедневных викторинах!</p>" \
+           f"</div>" \
            f"</div>" \
            f"</div>"
 
@@ -253,7 +257,7 @@ def get_stats_img(request):
           ".flex-holder {" \
           "display: flex;" \
           "flex-direction: row;" \
-          "justify-content: space-around;" \
+          "justify-content: space-between;" \
           "}" \
           ".block-content {" \
           "text-align: left !important;" \
@@ -261,10 +265,25 @@ def get_stats_img(request):
           "background: rgba(255, 255, 255, 0.3);" \
           "border-radius: 30px;" \
           "margin: 10px;" \
+          "}" \
+          ".holder {" \
+          "width: 800px;" \
           "}"
-    hti.screenshot(html_str=html, css_str=css, save_as=f'{request.user.username}.jpg', size=(1600, 1200))
+
+    HCTI_API_ENDPOINT = "https://hcti.io/v1/image"
+    HCTI_API_USER_ID = 'ee866a44-9af0-4964-8911-fca5fc6f5904'
+    HCTI_API_KEY = '99c853ac-de67-48a5-83f3-695c319a147c'
+
+    data = {
+        'html': html,
+        'css': css
+    }
+
+    image = requests.post(url=HCTI_API_ENDPOINT, data=data, auth=(HCTI_API_USER_ID, HCTI_API_KEY))
+
+
     return JsonResponse({
-        'url': os.path.join(django_settings.STATIC_ROOT, 'imgs/usersStats/') + f'{request.user.username}.jpg'
+        'url': image.json()['url']
     })
 
 

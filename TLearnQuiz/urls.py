@@ -32,7 +32,7 @@ urlpatterns = [
     path('api/get_quiz_leaders', get_quiz_leaders, name='apiGetQuizLeaders'),
     path('api/get_user_level_data', get_user_level_data_api, name='apiUserLeveldata'),
     path('registed', get_user_registed, name='registed'),
-    # path('stats', user_stats, name='stats'),
+    path('stats', user_stats, name='stats'),
     path('stats/download', get_stats_img, name='statsDownload'),
     path('stats/download/template', get_stats_img_template, name='statsImagesTemplate')
 ]
