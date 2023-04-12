@@ -31,6 +31,11 @@
 <div class="bg-rect-br-2"></div>
 <div class="bg-rect-br-3"></div>
 
+{% if user.is_authenticated %}
+    <a href="{% url 'stats' %}">
+        <div class="stats-btn"><i class='bx bxs-trophy'></i></div>
+    </a>
+{% endif %}
 
 <div class="quiz-answer-button"></div>
 <div class="quiz-answer-timer qat-idle"></div>
@@ -70,6 +75,21 @@
                 </div>
 
 
+                {% if sponsorTitle is not None %}
+                    <div class="block-content">
+                        <div class="d-flex align-items-center justify-content-around">
+                            <div>
+                                <b>Спонсор: {{ sponsorTitle }}</b>
+                            </div>
+                            <div style="width: 50%;">
+                                <img style='border-radius: 10px; position: relative; width: 100%; max-width: 100px; left: 50%; transform: translateX(-50%);' src="{{ sponsorImage.url }}">
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+
                 {% if not quizObj %}
                     <h1>Такого квиза не существует</h1>
                 {% else %}
@@ -91,7 +111,8 @@
                     {% endif %}
                 {% endif %}
                 <div>Действуют стандартные правила TLearnQuiz.
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Почитайте
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">Почитайте
                     </button>
                     , будет полезно.
                 </div>
@@ -135,7 +156,12 @@
                 <h5 id="quiz-result-area"></h5>
                 <h3 id="quiz-scores-area"></h3>
                 <p id="sending-res-status-area" class="block-content"></p>
+
                 <button class="btn btn-primary" onclick="location.reload();">Посмотреть таблицу лидеров</button>
+            </div>
+            <div class="quiz-popup-float" id="quiz-popup" style="display: none;">
+                <p><b>Quiz Popup</b></p>
+                <p>Текст сообщения</p>
             </div>
         </div>
 
@@ -193,6 +219,7 @@
 </div>
 
 
+<script src="{% static 'js/QuizPopup.js' %}"></script>
 <script>
 
     // MUSIC
@@ -359,6 +386,7 @@
 
                     quizEnd.play();
 
+
                     document.querySelector("#quiz-result-area").innerHTML = `${playerRes} / ${corrects.length}`;
                     document.querySelector("#quiz-scores-area").innerHTML = `Вы набрали ${scores} очков`;
 
@@ -375,6 +403,7 @@
                         statusLabel.classList.add("ok");
                         statusLabel.classList.add("text-center");
                         statusLabel.innerHTML = "<span>Ваши результаты учтены <i class='bx bx-check' ></i></span>";
+                        ShowLevelData(scores, scores);
                     } else {
                         statusLabel.classList.add("error");
                         statusLabel.classList.add("text-center");
@@ -483,7 +512,6 @@
         let boardTable = document.querySelector("#leader-board");
 
         let place = 1;
-
 
 
         for (var k in board.data.all) {

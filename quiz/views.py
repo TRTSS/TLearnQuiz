@@ -27,7 +27,9 @@ def play_quiz(request, quizId):
     context['quizObj'] = Quiz.objects.filter(id=quizId).first()
     context['now'] = timezone.now()
     context['corrects'] = []
-    print("hel")
+    context['sponsorTitle'] = context['quizObj'].quizSponsorTitle
+    context['sponsorImage'] = context['quizObj'].quizSponsorImage
+    print(context['sponsorTitle'])
     for i in Quiz.objects.filter(id=quizId).first().quizQuestions.all():
         context['corrects'].append(list(i.questionAnswers.all())[i.questionRightAnswerId].answerText)
         print(context['corrects'])
@@ -242,7 +244,7 @@ def get_stats_img(request):
            f"{get_scores_postfix(totalScores)}</span></h2></div><div class='block-content'><p>Мой средний счёт</p><h2>{avScores}" \
            f"<span style='font-size: 16px'> очк{get_scores_postfix(avScores)}</span></h2></div></div>" \
            f"<div class='flex-holder'>" \
-           f"<img src='http://zuvs.ru/static/imgs/cups/circleCup{str(1 + level // 10)}.png' style='position: realative; width: 50%;'>" \
+           f"<img src='http://zuvs.ru/static/imgs/cups/circleCup{str(1 + level // 10)}.png' style='position: realative; width: 50%;' alt='http://zuvs.ru/static/imgs/cups/circleCup{str(1 + level // 10)}.png'>" \
            f"<div>" \
            f"<h2>Участвуй в квизах вместе со мной!</h2>" \
            f"<p>Переходи в телеграмм канал: <i>t.me/tlearn_quiz</i> и участвуй в коротких ежедневных викторинах!</p>" \

@@ -84,7 +84,7 @@
                     <p>{{ currentXP }} / {{ xpNeed }}</p>
                 </div>
             </div>
-            <div class="block-content">
+            <div class="block-content text-center" >
                 <button class="btn btn-primary" onclick="DownloadStats(this);">Скачать статистику</button></a>
             </div>
         {% endif %}
@@ -105,7 +105,7 @@
         src.classList.add('disabled');
         let resp = await fetch('{% url 'statsDownload' %}');
         let res = await resp.json();
-        src.innerHTML = "Скачать статистику";
+
         src.classList.remove('disabled');
         const anchor = document.createElement('a');
         anchor.setAttribute('download', '');
@@ -114,6 +114,7 @@
         document.body.appendChild(anchor);
         anchor.click();
         document.body.removeChild(anchor);
+        src.innerHTML = "Скачать статистику";
     }
 </script>
 </body>

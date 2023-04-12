@@ -26,6 +26,8 @@ class Quiz(models.Model):
     quizStartDate = models.DateTimeField(auto_now=False, auto_now_add=False, null=False, default=timezone.now)
     quizEndDate = models.DateTimeField(auto_now=False, auto_now_add=False, null=False, default=timezone.now)
     quizQuestions = models.ManyToManyField(QuizQuestion)
+    quizSponsorTitle = models.CharField(max_length=100, null=True, blank=True)
+    quizSponsorImage = models.ImageField(null=True, blank=True, upload_to="sponsorImage/")
 
     def __str__(self):
         return f"[{self.id}] {self.quizTitle}"
