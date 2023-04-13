@@ -14,7 +14,7 @@ from django.templatetags.static import static
 from django.utils import timezone
 
 from TLearnQuiz.forms import NewUserForm
-from .models import Quiz, QuizResult
+from .models import Quiz, QuizResult, XPBonus
 from django.conf import settings as django_settings
 import os
 from django.template.loader import render_to_string
@@ -48,7 +48,16 @@ def register_request(request):
         else:
             messages.error(request, f'Не получилось вас зарегистрировать. email: {form}')
     form = NewUserForm()
-    return render(request, 'newUser.html', context={'register_form': form})
+    return render(request, 'newUser.html', context={'register_form': form, 'ip': get_client_ip(request)})
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 
 def login_request(request):
@@ -165,12 +174,10 @@ def user_stats(request):
         userResults = QuizResult.objects.filter(quizUser=request.user)
         context['quizCount'] = len(userResults)
 
-        totalScores = 0
-        for res in userResults:
-            totalScores += res.scores
+        totalScores, bonusScores = get_user_total_score(request.user)
 
-        context['totalScoresPostfix'] = get_scores_postfix(totalScores)
-        context['totalScores'] = totalScores
+        context['totalScoresPostfix'] = get_scores_postfix(totalScores + bonusScores)
+        context['totalScores'] = totalScores + bonusScores
 
         if len(userResults) > 0:
             avScores = totalScores // len(userResults)
@@ -180,7 +187,8 @@ def user_stats(request):
         context['avScores'] = avScores
         context['avScoresPostfix'] = postfix
 
-        context['currentLevel'], context['currentXP'], context['xpNeed'] = get_user_level_data(totalScores)
+        context['currentLevel'], context['currentXP'], context['xpNeed'] = get_user_level_data(
+            totalScores + bonusScores)
         context['leagueBadge'] = static(f"3d/cups/circleCup{1 + context['currentLevel'] // 10}.gltf")
 
     return render(request, 'statistic.html', context)
@@ -215,20 +223,30 @@ def get_user_level_data_api(request):
         if request.GET.get('offset') is not None:
             offset = int(request.GET.get('offset'))
     userResults = QuizResult.objects.filter(quizUser=request.user)
+    totalScores, bonusScores = get_user_total_score(request.user)
+    level, xp, xpNeed = get_user_level_data((totalScores + bonusScores) - offset)
+    return JsonResponse({'level': level, 'xp': xp, 'xpNeed': xpNeed})
+
+
+def get_user_total_score(user):
+    userResults = QuizResult.objects.filter(quizUser=user)
     totalScores = 0
     for res in userResults:
         totalScores += res.scores
-    level, xp, xpNeed = get_user_level_data(totalScores - offset)
-    return JsonResponse({'level': level, 'xp': xp, 'xpNeed': xpNeed})
+
+    bonusScores = 0
+    userBonuses = XPBonus.objects.filter(recipient=user)
+    for bonus in userBonuses:
+        bonusScores += bonus.xpAmount
+
+    return totalScores, bonusScores
 
 
 def get_stats_img(request):
     userResults = QuizResult.objects.filter(quizUser=request.user)
-    totalScores = 0
-    for res in userResults:
-        totalScores += res.scores
+    totalScores, bonusScores = get_user_total_score(request.user)
 
-    level, xp, xpNeed = get_user_level_data(totalScores)
+    level, xp, xpNeed = get_user_level_data(totalScores + bonusScores)
 
     avScores = 0
     if len(userResults) > 0:
@@ -240,8 +258,8 @@ def get_stats_img(request):
            f"<h1>Моя статистика TLearnQUIZ</h1><p>{request.user.username}</p>" \
            f"<div class='flex-holder'><div class='block-content'><p>Я участвовал в</p><h2>" \
            f"{len(userResults)}<span style='font-size: 16px'> квизах</span></h2></div><div " \
-           f"class='block-content'><p>Мой суммарный счёт</p><h2>{totalScores}<span style='font-size: 16px'> очк" \
-           f"{get_scores_postfix(totalScores)}</span></h2></div><div class='block-content'><p>Мой средний счёт</p><h2>{avScores}" \
+           f"class='block-content'><p>Мой суммарный счёт</p><h2>{totalScores + bonusScores}<span style='font-size: 16px'> очк" \
+           f"{get_scores_postfix(totalScores + bonusScores)}</span></h2></div><div class='block-content'><p>Мой средний счёт</p><h2>{avScores}" \
            f"<span style='font-size: 16px'> очк{get_scores_postfix(avScores)}</span></h2></div></div>" \
            f"<div class='flex-holder'>" \
            f"<img src='http://zuvs.ru/static/imgs/cups/circleCup{str(1 + level // 10)}.png' style='position: realative; width: 50%;' alt='http://zuvs.ru/static/imgs/cups/circleCup{str(1 + level // 10)}.png'>" \

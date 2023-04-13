@@ -21,6 +21,25 @@ class QuizQuestion(models.Model):
         return f'{self.questionText}'
 
 
+class Invite(models.Model):
+    inviter = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Приглашающий', related_name='Inviter')
+    taker = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Приглашенный', related_name='Taker')
+    date = models.DateTimeField(auto_now=True, verbose_name='Дата приглашения')
+
+    class Meta:
+        verbose_name = 'Приглашение'
+        verbose_name_plural = 'Приглашения'
+
+
+class XPBonus(models.Model):
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Получатель')
+    xpAmount = models.IntegerField(verbose_name='Опыт')
+
+    class Meta:
+        verbose_name = 'Бонус опыта'
+        verbose_name_plural = 'Бонусы опыта'
+
+
 class Quiz(models.Model):
     quizTitle = models.CharField(max_length=255)
     quizStartDate = models.DateTimeField(auto_now=False, auto_now_add=False, null=False, default=timezone.now)
