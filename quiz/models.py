@@ -34,10 +34,14 @@ class Quiz(models.Model):
 
 
 class QuizResult(models.Model):
-    quizRef = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    quizUser = models.ForeignKey(User, on_delete=models.CASCADE)
+    quizRef = models.ForeignKey(Quiz, on_delete=models.CASCADE, verbose_name='Квиз')
+    quizUser = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Участник')
 
-    scores = models.IntegerField()
+    scores = models.IntegerField(verbose_name='Счёт')
+
+    class Meta:
+        verbose_name = 'Результат квиза'
+        verbose_name_plural = 'Результаты квизов'
 
     def __str__(self):
         return f'{self.quizUser} - {self.quizRef}'
