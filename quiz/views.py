@@ -1,6 +1,7 @@
 import logging
 import math
 import requests
+from django.contrib.auth.models import User
 
 import imgkit
 
@@ -38,6 +39,7 @@ def play_quiz(request, quizId):
 
 
 def register_request(request):
+    context = {}
     if request.method == "POST":
         print("Yammi data!")
         form = NewUserForm(request.POST)
@@ -47,8 +49,12 @@ def register_request(request):
             return redirect('/registed')
         else:
             messages.error(request, f'Не получилось вас зарегистрировать. email: {form}')
+    if request.GET.get('invitor') != '':
+        invitorId = int(request.GET.get('invitor'))
     form = NewUserForm()
-    return render(request, 'newUser.html', context={'register_form': form, 'ip': get_client_ip(request)})
+    context['register_form'] = form
+    context['ip'] = get_client_ip(request)
+    return render(request, 'newUser.html', context)
 
 
 def get_client_ip(request):
