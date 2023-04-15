@@ -213,7 +213,7 @@ def user_stats(request):
         postfix = get_scores_postfix(avScores)
         context['avScores'] = avScores
         context['avScoresPostfix'] = postfix
-        context['refHost'] = django_settings.HOST
+        context['refHost'] = django_settings.HOSTREF
 
 
         bonuses = XPBonus.objects.filter(recipient=request.user)
