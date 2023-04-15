@@ -50,10 +50,12 @@ def register_request(request):
                 invitorIdR = int(request.GET.get('invitor'))
                 bonus = XPBonus()
                 bonus.xpAmount = 200
+                bonus.target = 'Привественный подарок'
                 bonus.recipient = request.user
                 bonus.save()
                 bonus = XPBonus()
                 bonus.xpAmount = 100
+                bonus.target = 'За приглашение друга'
                 bonus.recipient = User.objects.get(id=invitorIdR)
                 bonus.save()
                 inv = Invite()
@@ -211,6 +213,8 @@ def user_stats(request):
         postfix = get_scores_postfix(avScores)
         context['avScores'] = avScores
         context['avScoresPostfix'] = postfix
+        context['refHost'] = django_settings.HOST
+
 
         bonuses = XPBonus.objects.filter(recipient=request.user)
         context['bonuses'] = []

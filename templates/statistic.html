@@ -11,6 +11,7 @@
     <link href="{% static 'quizStyle.css' %}" rel="stylesheet">
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+    <script src="{% static 'bootstrap-5.0.2-dist/js/bootstrap.js' %}"></script>
 </head>
 <body style="overflow-x: hidden;">
 
@@ -81,11 +82,17 @@
                         </div>
                     </div>
                     <p>{{ currentXP }} / {{ xpNeed }}</p>
+                    <button class="btn btn-primary" onclick="DownloadStats(this);">Скачать статистику</button>
                 </div>
             </div>
             <div class="block-content text-center">
-                <button class="btn btn-primary" onclick="DownloadStats(this);">Скачать статистику</button>
-                </a>
+                <h2>Реферальная ссылка</h2>
+                <p>Приглашайте друзей играть вместе с вами! Если ваш друг присоединиться к игре, то он получит 200 ед. опыта, а вы получите 100 ед. опыта в качестве бонуса.</p>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Ссылка</span>
+                  <input type="text" id="refLink" class="form-control" aria-label="" value="{{ refHost }}{% url 'regist' %}?invitor={{ request.user.id }}" disabled>
+                  <span class="input-group-text" id="btnRefLink" onclick="copyRefLink();" style="cursor: pointer;"><i class='bx bx-copy'></i></span>
+                </div>
             </div>
             <div class="block-content">
                 <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -97,10 +104,11 @@
                                 Бонусы
                             </button>
                         </h2>
+
                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
                              aria-labelledby="panelsStayOpen-headingOne">
-                            <div class="accordion-body">
-                                <table>
+                            <div class="accordion-body bg-light text-dark">
+                                <table style="width: 100%;">
                                     {% for b in bonuses %}
                                         <tr>
                                             <td>{{ b.target }}</td>
@@ -147,6 +155,12 @@
         anchor.click();
         document.body.removeChild(anchor);
         src.innerHTML = "Скачать статистику";
+    }
+
+    function copyRefLink () {
+        let link = document.querySelector('#refLink').value;
+        navigator.clipboard.writeText(link);
+        document.querySelector('#btnRefLink').innerHTML = "Готово!"
     }
 </script>
 </body>
