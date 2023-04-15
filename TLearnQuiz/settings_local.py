@@ -8,7 +8,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-HOST = 'http://127.0.0.1:8000'
+HOSTREF = 'http://127.0.0.1:8000'
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATABASES = {

@@ -8,7 +8,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '89.111.136.90', 'zuvs.ru']
 
-HOST='http://zuvs.ru'
+HOSTREF='http://zuvs.ru'
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATABASES = {
