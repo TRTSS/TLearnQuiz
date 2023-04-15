@@ -15,7 +15,6 @@
 <body style="overflow-x: hidden;">
 
 
-
 <div class="bg-rect-tl-1"></div>
 <div class="bg-rect-tl-2"></div>
 <div class="bg-rect-tl-3"></div>
@@ -69,7 +68,8 @@
                 </div>
 
                 <div class="text-center" style="height: 300%">
-                    <model-viewer style='width: 100%; height: 300px;' src="{{ leagueBadge }}" alt="VR Headset" auto-rotate camera-controls ios-src="{{ leagueBadge }}"></model-viewer>
+                    <model-viewer style='width: 100%; height: 300px;' src="{{ leagueBadge }}" alt="VR Headset"
+                                  auto-rotate camera-controls ios-src="{{ leagueBadge }}"></model-viewer>
                 </div>
                 <div class="text-center" style="width: 100%;">
 
@@ -83,8 +83,41 @@
                     <p>{{ currentXP }} / {{ xpNeed }}</p>
                 </div>
             </div>
-            <div class="block-content text-center" >
-                <button class="btn btn-primary" onclick="DownloadStats(this);">Скачать статистику</button></a>
+            <div class="block-content text-center">
+                <button class="btn btn-primary" onclick="DownloadStats(this);">Скачать статистику</button>
+                </a>
+            </div>
+            <div class="block-content">
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                    aria-controls="panelsStayOpen-collapseOne">
+                                Бонусы
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                             aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <table>
+                                    {% for b in bonuses %}
+                                        <tr>
+                                            <td>{{ b.target }}</td>
+                                            <td class="text-end">
+                                                {% if b.xpAmount > 0 %}
+                                                    <span class="text-success">+ {{ b.xpAmount }}</span>
+                                                {% else %}
+                                                    <span class="text-danger">- {{ b.xpAmount }}</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         {% endif %}
     </div>
@@ -99,7 +132,7 @@
 <script>
     document.querySelector('.xpbar').style.width = String(100 / {{ xpNeed }} * {{ currentXP }}) + "%";
 
-    async function DownloadStats (src) {
+    async function DownloadStats(src) {
         src.innerHTML = "Формируем статистику...";
         src.classList.add('disabled');
         let resp = await fetch('{% url 'statsDownload' %}');

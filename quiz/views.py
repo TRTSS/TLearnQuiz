@@ -15,7 +15,7 @@ from django.templatetags.static import static
 from django.utils import timezone
 
 from TLearnQuiz.forms import NewUserForm
-from .models import Quiz, QuizResult, XPBonus
+from .models import Quiz, QuizResult, XPBonus, Invite
 from django.conf import settings as django_settings
 import os
 from django.template.loader import render_to_string
@@ -46,11 +46,30 @@ def register_request(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('/registed')
+            if request.GET.get('invitor') is not None:
+                invitorIdR = int(request.GET.get('invitor'))
+                bonus = XPBonus()
+                bonus.xpAmount = 200
+                bonus.recipient = request.user
+                bonus.save()
+                bonus = XPBonus()
+                bonus.xpAmount = 100
+                bonus.recipient = User.objects.get(id=invitorIdR)
+                bonus.save()
+                inv = Invite()
+                inv.taker = request.user
+                inv.inviter = User.objects.get(id=invitorIdR)
+                inv.save()
+                return redirect('/registed?invited=1')
+            else:
+                return redirect('/registed')
         else:
             messages.error(request, f'Не получилось вас зарегистрировать. email: {form}')
-    if request.GET.get('invitor') != '':
+    context['invitor'] = None
+    if request.GET.get('invitor') is not None:
         invitorId = int(request.GET.get('invitor'))
+    if User.objects.filter(id=invitorId).exists():
+        context['invitor'] = User.objects.get(id=invitorId)
     form = NewUserForm()
     context['register_form'] = form
     context['ip'] = get_client_ip(request)
@@ -192,6 +211,11 @@ def user_stats(request):
         postfix = get_scores_postfix(avScores)
         context['avScores'] = avScores
         context['avScoresPostfix'] = postfix
+
+        bonuses = XPBonus.objects.filter(recipient=request.user)
+        context['bonuses'] = []
+        for b in bonuses:
+            context['bonuses'].append(b)
 
         context['currentLevel'], context['currentXP'], context['xpNeed'] = get_user_level_data(
             totalScores + bonusScores)

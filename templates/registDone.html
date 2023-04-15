@@ -12,14 +12,28 @@
     <link href="{% static 'quizStyle.css' %}" rel="stylesheet">
 </head>
 <body>
-    <div class="fullpage border border-2">
-            <div class="d-flex align-item-center justify-content-between">
-                <div class="quiz-block text-center" id="welcome-area">
-                    <h2>Вы зарегистрированы</h2>
-                    <p>Ура! Вы зарегистрированы, {{ request.user.username }}!</p>
-                    <a href="{% url 'index' %}" style="color: white;">Перейти на главную страницу</a>
+<div class="fullpage border border-2">
+    <div class="d-flex align-item-center justify-content-between">
+        <div class="quiz-block text-center" id="welcome-area">
+            <h2>Вы зарегистрированы</h2>
+            <p>Ура! Вы зарегистрированы, {{ request.user.username }}!</p>
+            {% if request.GET.invited == '1' %}
+                <div class="alert alert-primary">
+                    <p><b>Вы присоединились по приглашению</b></p>
+                    <p>Вы получили +200 очков опыта</p>
                 </div>
+                <div class="quiz-popup-float" id="quiz-popup" style="display: none;">
+                    <p><b>Quiz Popup</b></p>
+                    <p>Текст сообщения</p>
+                </div>
+                <script src="{% static 'js/QuizPopup.js' %}"></script>
+                <script>
+                    ShowLevelData(200, 200);
+                </script>
+            {% endif %}
+            <a href="{% url 'index' %}" style="color: white;">Перейти на главную страницу</a>
         </div>
     </div>
+</div>
 </body>
 </html>

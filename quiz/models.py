@@ -34,6 +34,7 @@ class Invite(models.Model):
 class XPBonus(models.Model):
     recipient = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Получатель')
     xpAmount = models.IntegerField(verbose_name='Опыт')
+    target = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Бонус опыта'

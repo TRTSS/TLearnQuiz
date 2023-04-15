@@ -37,6 +37,12 @@
     <div class="fullpage border border-2">
             <div class="d-flex align-item-center justify-content-between">
                 <div class="quiz-block text-center" id="welcome-area" style="overflow:auto; max-height: 100%;">
+                    {% if invitor %}
+                        <div class="alert alert-primary">
+                            <p><b>Вы приглашены пользователем {{ invitor }}</b></p>
+                            <p>После успешной регистрации вы получите +200 очков опыта</p>
+                        </div>
+                    {% endif %}
                     <h2>Регистрация</h2>
                     <p>Новый участник? Давайте знакомиться!</p>
 
