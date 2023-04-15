@@ -223,7 +223,7 @@ def user_stats(request):
         context['refHost'] = django_settings.HOSTREF
 
 
-        bonuses = XPBonus.objects.filter(recipient=request.user)
+        bonuses = reversed(XPBonus.objects.filter(recipient=request.user))
         context['bonuses'] = []
         for b in bonuses:
             context['bonuses'].append(b)
