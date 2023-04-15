@@ -138,7 +138,7 @@ def send_quiz_result(request):
             res.save()
             if Invite.objects.filter(taker=request.user).exists():
                 invite = Invite.objects.get(taker=request.user)
-                bonus = XPBonus
+                bonus = XPBonus()
                 bonus.recipient = invite.inviter
                 bonus.xpAmount = 5
                 bonus.target = 'Приглашенный вами участник прошел квиз'
