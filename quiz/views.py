@@ -51,10 +51,12 @@ def register_request(request):
                 invitorIdR = int(request.GET.get('invitor'))
                 bonus = XPBonus()
                 bonus.xpAmount = 200
+                bonus.target = 'Привественный подарок'
                 bonus.recipient = request.user
                 bonus.save()
                 bonus = XPBonus()
                 bonus.xpAmount = 100
+                bonus.target = 'За приглашение друга'
                 bonus.recipient = User.objects.get(id=invitorIdR)
                 bonus.save()
                 inv = Invite()
@@ -135,6 +137,13 @@ def send_quiz_result(request):
             res.quizUser = request.user
             res.scores = scores
             res.save()
+            if Invite.objects.filter(taker=request.user).exists():
+                invite = Invite.objects.get(taker=request.user)
+                bonus = XPBonus()
+                bonus.recipient = invite.inviter
+                bonus.xpAmount = 5
+                bonus.target = 'Приглашенный вами участник прошел квиз'
+                bonus.save()
             return JsonResponse({'ok': True})
 
 @csrf_exempt
@@ -212,8 +221,10 @@ def user_stats(request):
         postfix = get_scores_postfix(avScores)
         context['avScores'] = avScores
         context['avScoresPostfix'] = postfix
+        context['refHost'] = django_settings.HOSTREF
 
-        bonuses = XPBonus.objects.filter(recipient=request.user)
+
+        bonuses = reversed(XPBonus.objects.filter(recipient=request.user))
         context['bonuses'] = []
         for b in bonuses:
             context['bonuses'].append(b)
