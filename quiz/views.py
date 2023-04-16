@@ -13,6 +13,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.templatetags.static import static
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 
 from TLearnQuiz.forms import NewUserForm
 from .models import Quiz, QuizResult, XPBonus, Invite
@@ -136,7 +137,7 @@ def send_quiz_result(request):
             res.save()
             return JsonResponse({'ok': True})
 
-
+@csrf_exempt
 def get_quiz_leaders(request):
     if request.method == "POST":
         quizId = request.POST.get('quizId')
