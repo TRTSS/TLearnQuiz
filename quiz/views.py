@@ -47,32 +47,36 @@ def register_request(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            if request.GET.get('invitor') is not None:
-                invitorIdR = int(request.GET.get('invitor'))
-                bonus = XPBonus()
-                bonus.xpAmount = 200
-                bonus.target = 'Привественный подарок'
-                bonus.recipient = request.user
-                bonus.save()
-                bonus = XPBonus()
-                bonus.xpAmount = 100
-                bonus.target = 'За приглашение друга'
-                bonus.recipient = User.objects.get(id=invitorIdR)
-                bonus.save()
-                inv = Invite()
-                inv.taker = request.user
-                inv.inviter = User.objects.get(id=invitorIdR)
-                inv.save()
-                return redirect('/registed?invited=1')
+            if request.method == "GET":
+                if request.GET.get('invitor') is not None:
+                    invitorIdR = int(request.GET.get('invitor'))
+                    bonus = XPBonus()
+                    bonus.xpAmount = 200
+                    bonus.target = 'Привественный подарок'
+                    bonus.recipient = request.user
+                    bonus.save()
+                    bonus = XPBonus()
+                    bonus.xpAmount = 100
+                    bonus.target = 'За приглашение друга'
+                    bonus.recipient = User.objects.get(id=invitorIdR)
+                    bonus.save()
+                    inv = Invite()
+                    inv.taker = request.user
+                    inv.inviter = User.objects.get(id=invitorIdR)
+                    inv.save()
+                    return redirect('/registed?invited=1')
+                else:
+                    return redirect('/registed')
             else:
                 return redirect('/registed')
         else:
             messages.error(request, f'Не получилось вас зарегистрировать. email: {form}')
     context['invitor'] = None
-    if request.GET.get('invitor') is not None:
-        invitorId = int(request.GET.get('invitor'))
-    if User.objects.filter(id=invitorId).exists():
-        context['invitor'] = User.objects.get(id=invitorId)
+    if request.method == "GET":
+        if request.GET.get('invitor') is not None:
+            invitorId = int(request.GET.get('invitor'))
+            if User.objects.filter(id=invitorId).exists():
+                context['invitor'] = User.objects.get(id=invitorId)
     form = NewUserForm()
     context['register_form'] = form
     context['ip'] = get_client_ip(request)
